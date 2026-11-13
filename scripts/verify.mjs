@@ -48,8 +48,8 @@ const runCmd = async (p, cmd) => { await p.locator("#cmd").fill(cmd); await p.lo
   ok((await p.locator("#foot-gh").getAttribute("href")) === "https://github.com/voyager-from-space", "desktop: footer github link");
   ok((await p.evaluate(() => document.documentElement.dataset.theme)) === undefined && (await p.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue("--fg").trim())) === "#ffb03c", "desktop: amber is the default theme");
   const og = await p.locator('meta[property="og:image"]').getAttribute("content");
-  const ogRes = await p.request.get(BASE + og);
-  ok(og === "og-image.png" && ogRes.ok() && (await ogRes.body()).length > 5000, "desktop: og:image wired and served");
+  const ogRes = await p.request.get(BASE + "og-image.png");
+  ok((og === "og-image.png" || og.endsWith("/og-image.png")) && ogRes.ok() && (await ogRes.body()).length > 5000, "desktop: og:image wired and served");
   await p.screenshot({ path: SHOTS + "desktop-landing.png" });
 
   await runCmd(p, "help");
