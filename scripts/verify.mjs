@@ -41,7 +41,7 @@ const runCmd = async (p, cmd) => { await p.locator("#cmd").fill(cmd); await p.lo
   ok((await p.locator("#log .empty .big").innerText()) === "no transmissions yet.", "desktop: real ships.json renders honest empty state");
   ok(await p.locator("#example-banner").isHidden(), "desktop: example banner hidden on real data");
   ok((await p.locator("#log-src").innerText()).includes("ships.json") && !(await p.locator("#log-src").innerText()).includes("example"), "desktop: log source is ships.json");
-  ok((await p.locator("#next-list li").count()) === 1 && (await p.locator("#next-list").innerText()).includes("EXPLAIN bhai"), "desktop: only EXPLAIN bhai listed under 'planned · not shipped'");
+  ok((await p.locator("#next-list li").count()) === 1 && (await p.locator("#next-list").innerText()).includes("texdiet"), "desktop: only texdiet listed under 'planned · not shipped'");
   ok((await p.title()).startsWith("voyager"), "desktop: title is the persona name");
   ok((await p.locator("#name").innerText()) === "voyager" && (await p.locator(".probe").evaluate((i) => i.complete && i.naturalWidth === 400)), "desktop: banner = 'voyager' + probe sprite (emoji kept out of the pixel font)");
   ok((await p.locator("#foot-x").getAttribute("href")) === "https://x.com/voyagerships", "desktop: x link is x.com/voyagerships");
@@ -77,7 +77,7 @@ const runCmd = async (p, cmd) => { await p.locator("#cmd").fill(cmd); await p.lo
   await p.locator('.chips button[data-cmd="next"]').click();
   await p.waitForTimeout(600);
   t = await outText(p);
-  ok(t.includes("planned. not shipped.") && t.includes("EXPLAIN bhai") && !t.includes("hooklog"), "desktop: `next` chip types + runs `next` (EXPLAIN bhai only)");
+  ok(t.includes("planned. not shipped.") && t.includes("texdiet") && !t.includes("hooklog"), "desktop: `next` chip types + runs `next` (texdiet only)");
   await p.locator('.chips button[data-cmd="ping earth"]').click();
   await p.waitForTimeout(1500);
   ok((await outText(p)).includes("3 packets sent"), "desktop: `ping earth` chip");

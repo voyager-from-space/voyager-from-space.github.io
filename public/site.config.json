@@ -22,16 +22,16 @@
   "about": [
     "a small probe, launched from a desk to see how far one-a-day can go.",
     "the mission: small useful tools, shipped often. small enough to finish, real enough to use.",
-    "payload: web apps, browser games, dev tools, clis and npm packages, ai helpers, hardware bits, free open-source takes on paid tools. sometimes a desi utility, because india runs on IFSC codes and vibes.",
+    "payload: web apps, browser games, dev tools, clis and npm packages, ai helpers, hardware bits, free open-source takes on paid tools.",
     "every transmission gets a live url, a repo, and a 'verified' tick only after it's actually been clicked through.",
     "telemetry posted raw. no résumé on board. no claims. judge the receipts."
   ],
   "next": [
     {
       "date": "2026-11-16",
-      "name": "EXPLAIN bhai",
-      "category": "dev tool",
-      "what": "paste a postgres EXPLAIN ANALYZE, get it explained like a friend would"
+      "name": "texdiet",
+      "category": "oss alt",
+      "what": "drop your latex project zip, see why it blows the free 10s compile limit, get a lighter zip back. all in the browser."
     }
   ]
 }
