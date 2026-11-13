@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- sync:start (generated from site.config.json by `npm run sync`; edit the config, not this block) -->
+<title>voyager 🛰️ ~ mission log</title>
+<meta name="description" content="anon probe, launched from a desk. ships small useful tools, often: web, games, dev tools, ai, hardware. telemetry posted raw.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="voyager 🛰️ ~ mission log">
+<meta property="og:description" content="anon probe, launched from a desk. ships small useful tools, often: web, games, dev tools, ai, hardware. telemetry posted raw.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="voyager mission log: amber telemetry console">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og-image.png">
+<meta name="twitter:site" content="@voyagerships">
+<meta name="twitter:title" content="voyager 🛰️ ~ mission log">
+<meta name="twitter:description" content="anon probe, launched from a desk. ships small useful tools, often: web, games, dev tools, ai, hardware. telemetry posted raw.">
+<!-- sync:end -->
+<meta name="theme-color" content="#0a0906">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="fonts/plexmono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/vt323.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#shiplog">skip to the mission log</a>
+<div class="stars" aria-hidden="true"></div>
+<div class="crt" aria-hidden="true"></div>
+
+<header class="bar">
+  <span class="bar-l"><span class="led" aria-hidden="true"></span><span id="bar-who">voyager@probe</span></span>
+  <span class="bar-m" id="bar-stats">transmissions: 0</span>
+  <span class="bar-r"><span id="met">T-?</span> &middot; <span id="clock">--:--</span> ist</span>
+</header>
+
+<div id="example-banner" class="example-banner" hidden>
+  previewing <b>ships.example.json</b> &mdash; fake test data, not real transmissions. <a href="./">back to the real log</a>
+</div>
+
+<main class="wrap">
+  <section class="hero">
+    <p class="kicker" id="kicker">deep-space probe &middot; mission log</p>
+    <h1 class="banner"><img class="probe" src="avatar.png" width="400" height="400" alt=""><span id="name">voyager</span><span class="cursor" aria-hidden="true"></span></h1>
+    <p class="tagline" id="tagline">shipping 1 tiny product every day, in public. receipts only.</p>
+  </section>
+
+  <div class="grid">
+    <section class="term" aria-label="probe console">
+      <div class="term-head">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="term-title" id="term-title">probe console &mdash; uplink open</span>
+        <span class="term-hint">type <kbd>help</kbd></span>
+      </div>
+      <div class="term-body" id="term-body">
+        <div id="out" class="out" role="log" aria-live="polite"></div>
+        <form id="prompt-form" class="prompt" autocomplete="off">
+          <label for="cmd" class="ps1" id="ps1">voyager@probe:~$</label>
+          <input id="cmd" name="cmd" type="text" spellcheck="false" autocapitalize="off" autocorrect="off" enterkeyhint="go" aria-label="console command">
+        </form>
+      </div>
+      <nav class="chips" aria-label="quick commands">
+        <button type="button" data-cmd="help">help</button>
+        <button type="button" data-cmd="cat about">about</button>
+        <button type="button" data-cmd="log">log</button>
+        <button type="button" data-cmd="next">next</button>
+        <button type="button" data-cmd="ping earth">ping</button>
+        <button type="button" data-cmd="x">x &#8599;</button>
+        <button type="button" data-cmd="chai">chai</button>
+        <button type="button" data-cmd="clear">clear</button>
+      </nav>
+    </section>
+
+    <aside class="side">
+      <pre class="receipt" id="receipt" aria-label="telemetry"></pre>
+      <section class="file" aria-labelledby="next-h">
+        <h2 class="file-h" id="next-h"><span>next transmission</span><span class="tag tag-plan">planned &middot; not shipped</span></h2>
+        <ol class="next" id="next-list"></ol>
+      </section>
+    </aside>
+  </div>
+
+  <section class="file shiplog" id="shiplog" aria-labelledby="log-h">
+    <h2 class="file-h" id="log-h"><span>mission.log</span><span class="tag" id="log-src">source: ships.json</span></h2>
+    <div id="log"></div>
+  </section>
+
+  <footer class="foot">
+    <p>no trackers. no cookies. no résumé. one json file and a habit.</p>
+    <p class="foot-links"><a id="foot-x" href="https://x.com/voyagerships" rel="me noopener">x.com/voyagerships</a> <a id="foot-gh" href="https://github.com/voyager-from-space" rel="me noopener">github.com/voyager-from-space</a></p>
+  </footer>
+</main>
+
+<noscript><p class="noscript">this site is a probe console and consoles need javascript. the log lives at <a href="ships.json">ships.json</a>.</p></noscript>
+<script src="app.js" defer></script>
+</body>
+</html>

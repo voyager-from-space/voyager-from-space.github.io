@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-01-01",
+    "name": "example-orbit-golf",
+    "category": "game",
+    "oneliner": "EXAMPLE DATA. not a real ship. mini golf, but the holes have gravity.",
+    "live": "https://example.com/orbit-golf",
+    "repo": "https://example.com/repo/orbit-golf",
+    "verified": true
+  },
+  {
+    "date": "2026-01-02",
+    "name": "example-cron-whisperer",
+    "category": "cli",
+    "oneliner": "EXAMPLE DATA. not a real ship. translates cron expressions into plain words.",
+    "live": "https://example.com/cron-whisperer",
+    "repo": "https://example.com/repo/cron-whisperer",
+    "verified": false
+  }
+]

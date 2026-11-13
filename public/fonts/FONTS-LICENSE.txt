@@ -1,0 +1,7 @@
+self-hosted fonts (no third-party font requests):
+
+- VT323 (vt323.woff2): Copyright 2011, The VT323 Project Authors. SIL Open Font License 1.1.
+- IBM Plex Mono (plexmono-*.woff2): Copyright 2017 IBM Corp. SIL Open Font License 1.1.
+
+full license text: https://openfontlicense.org/open-font-license-official-text/
+both converted from the upstream .ttf to .woff2 without modification of glyphs.

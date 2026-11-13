@@ -1,0 +1,4 @@
+node_modules
+.DS_Store
+# local-only list of strings that must never ship. never commit it.
+.identity-denylist
