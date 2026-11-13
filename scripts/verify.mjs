@@ -67,11 +67,14 @@ const pngSize = (buf) => ({ w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) });
   const { p, ctx, errors, external, bytes } = await open({ width: 1280, height: 800 });
   ok(await p.evaluate(() => !!document.querySelector("header nav") && !!document.querySelector("main") && !!document.querySelector("footer")), "landmarks: header, nav, main, footer");
   const h1 = (await p.locator("h1").innerText()).replace(/\s+/g, " ");
-  ok(h1.includes("useful little tools for everyone") && h1.includes("in public"), "section 1: hero mission statement");
+  ok(h1.includes("Useful little tools for everyone") && h1.includes("in public"), "section 1: hero mission statement");
   ok(await p.locator("h1").isVisible() && (await p.locator("h1").boundingBox()).y < 800, "hero message is above the fold");
-  ok((await p.locator(".steps li").count()) === 3 && (await p.locator(".steps h3").allInnerTexts()).join("|") === "mission numbers|open code|raw numbers", "section 2: how it works has 3 items (mission numbers, open code, raw numbers)");
-  ok(await p.locator("section#log h2").innerText() === "mission log", "section 3: mission log");
-  ok(await p.locator("section#manifesto h2").innerText() === "manifesto", "section 4: manifesto");
+  ok((await p.locator(".steps li").count()) === 3 && (await p.locator(".steps h3").allInnerTexts()).join("|") === "Mission numbers|Open code|Raw numbers", "section 2: how it works has 3 items (mission numbers, open code, raw numbers)");
+  ok(await p.locator("section#log h2").innerText() === "Mission log", "section 3: mission log");
+  ok(await p.locator("section#manifesto h2").innerText() === "Manifesto", "section 4: manifesto");
+  const caps = await p.evaluate(() => [...document.querySelectorAll("body *")].filter((e) => e.childElementCount === 0 && e.textContent.trim() && getComputedStyle(e).textTransform === "uppercase").length);
+  ok(caps === 0, `no all-caps text-transform labels (${caps} found)`);
+  ok(!/\u00b7|&middot;/.test(await p.content()), "no 'A · B' dot pattern in the page");
   ok(await p.locator("section#links").isVisible(), "section 5: links");
 
   const next = p.locator("#next-launch");
@@ -81,7 +84,7 @@ const pngSize = (buf) => ({ w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) });
   ok(nt.includes("planned, not shipped") && (await next.locator(".patch").getAttribute("aria-label")).includes("planned"), "next launch card is labelled planned, not shipped");
   const shipped = JSON.parse(await (await p.request.get(`${BASE}ships.json?${cb}`)).text());
   ok(nt.includes(`mission ${String(shipped.length + 1).padStart(3, "0")}`), "next launch gets the next mission number");
-  if (shipped.length === 0) ok((await p.locator("#empty .big").innerText()) === "no launches yet." && (await p.locator("#ships .mission").count()) === 0, "empty ships.json renders the empty state");
+  if (shipped.length === 0) ok((await p.locator("#empty .big").innerText()) === "No launches yet." && (await p.locator("#ships .mission").count()) === 0, "empty ships.json renders the empty state");
   else ok((await p.locator("#ships .mission").count()) === shipped.length, `ships.json renders ${shipped.length} launches`);
   ok(await p.locator("#example-banner").isHidden(), "example banner hidden on real data");
 
@@ -147,8 +150,8 @@ const pngSize = (buf) => ({ w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) });
 // ---- forced-empty log, so the empty state is tested even after real ships exist
 {
   const { p, ctx, errors } = await open({ width: 1280, height: 800 }, "", {}, (p) => p.route(/ships\.json/, (r) => r.fulfill({ contentType: "application/json", body: "[]" })));
-  ok((await p.locator("#empty").isVisible()) && (await p.locator("#empty").innerText()).includes("mission 001 goes up on 16 nov 2026"), "empty ships.json: empty state names mission 001 and the date");
-  ok((await p.locator("#next-launch").innerText()).includes("mission 001"), "empty ships.json: texdiet is mission 001");
+  ok((await p.locator("#empty").isVisible()) && (await p.locator("#empty").innerText()).includes("Mission 001 goes up on 16 Nov 2026"), "empty ships.json: empty state names mission 001 and the date");
+  ok((await p.locator("#next-launch").innerText()).includes("Mission 001"), "empty ships.json: texdiet is mission 001");
   ok(errors.length === 0, "empty: no console errors");
   await ctx.close();
 }
@@ -163,8 +166,8 @@ const pngSize = (buf) => ({ w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) });
   ok(labels[0] === "mission patch 002, example-cron-whisperer" && labels[1] === "mission patch 001, example-orbit-golf", "example: newest first, patches carry mission number + name");
   ok(await p.locator("#ships .patch").first().evaluate((s) => [...s.querySelectorAll("textPath")].map((t) => t.textContent).join("|") === "VOYAGER|EXAMPLE-CRON-WHISPERER"), "example: patch text reads VOYAGER / ship name");
   const t0 = await cards.nth(0).innerText(), t1 = await cards.nth(1).innerText();
-  ok(t0.includes("unverified") && t1.includes("verified") && t0.includes("cli") && t0.includes("live") && t0.includes("code"), "example: category, verified/unverified and live/code links shown");
-  ok((await p.locator("#next-launch").innerText()).includes("mission 003"), "example: next launch numbered after the shipped ones");
+  ok(t0.includes("Unverified") && t1.includes("Verified") && t0.includes("cli") && t0.includes("Live site") && t0.includes("Code"), "example: category, verified/unverified and live/code links shown");
+  ok((await p.locator("#next-launch").innerText()).includes("Mission 003"), "example: next launch numbered after the shipped ones");
   ok(errors.length === 0, "example: no console errors" + (errors.length ? " -> " + errors.join(" | ") : ""));
   await ctx.close();
 }

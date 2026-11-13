@@ -1,8 +1,8 @@
-# voyager · mission log
+# voyager mission log
 
-the site at https://voyager-from-space.github.io. an anon builder's log of small useful tools,
-one launch per mission number. static html/css/js, no build step, no backend, no trackers,
-fonts self-hosted.
+The site at https://voyager-from-space.github.io. An anon builder's log of small useful tools,
+one launch per mission number. Static HTML, CSS and JS, with no build step, no backend and no trackers.
+Fonts are self-hosted.
 
 ```
 public/
@@ -12,7 +12,7 @@ public/
   site.config.json    persona: name, handle, links, tagline, categories, next launch
   ships.json          the mission log. single source of truth. starts empty
   ships.example.json  2 fake entries for testing only. never live data
-  fonts/              IBM Plex Sans + Plex Mono (OFL 1.1, see fonts/OFL.txt)
+  fonts/              IBM's unmodified Plex Sans + Plex Mono woff2 (OFL 1.1, see fonts/OFL.txt)
   og-image.png        1200x630 share card; favicon-32.png + apple-touch-icon.png
 scripts/
   sync-config.mjs     writes the title/og/twitter meta in index.html from the config

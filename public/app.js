@@ -3,7 +3,7 @@
 const example = new URLSearchParams(location.search).get("ships") === "example";
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const pad = (n) => String(n).padStart(3, "0");
-const day = (iso) => new Date(iso + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).toLowerCase();
+const day = (iso) => new Date(iso + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 
 // a circular mission patch: number in the middle, "voyager" on the top arc, the ship name on the bottom arc.
 function patch(n, name, planned) {
@@ -23,13 +23,13 @@ function patch(n, name, planned) {
 }
 
 function card(s, n, planned) {
-  const status = planned ? `<span class="status planned">planned, not shipped</span>`
-    : s.verified ? `<span class="status ok">verified</span>` : `<span class="status unverified">unverified</span>`;
-  const links = planned ? "" : `${s.live ? `<a href="${esc(s.live)}" rel="noopener">live ↗</a>` : ""}${s.repo ? `<a href="${esc(s.repo)}" rel="noopener">code ↗</a>` : ""}`;
+  const status = planned ? `<span class="status planned">Planned, not shipped</span>`
+    : s.verified ? `<span class="status ok">Verified</span>` : `<span class="status unverified">Unverified</span>`;
+  const links = planned ? "" : `${s.live ? `<a href="${esc(s.live)}" rel="noopener">Live site</a>` : ""}${s.repo ? `<a href="${esc(s.repo)}" rel="noopener">Code</a>` : ""}`;
   return `<article class="mission${planned ? " next" : ""}"${planned ? ' id="next-launch"' : ""}>
   ${patch(n, s.name, planned)}
   <div>
-    <p class="meta"><span>mission ${pad(n)}</span><span>${planned ? "launches " : ""}${day(s.date)}</span>${s.category ? `<span>${esc(s.category)}</span>` : ""}</p>
+    <p class="meta"><span>Mission ${pad(n)}</span><span>${planned ? "Launches " : ""}${day(s.date)}</span>${s.category ? `<span>${esc(s.category)}</span>` : ""}</p>
     <h3>${esc(s.name)}</h3>
     <p>${esc(s.oneliner ?? s.what)}</p>
     <p class="go">${status}${links}</p>
@@ -39,8 +39,8 @@ function card(s, n, planned) {
 
 const emptyState = (cfg) => `<div class="empty" id="empty">
   <svg viewBox="0 0 72 72" aria-hidden="true"><ellipse cx="36" cy="36" rx="32" ry="11" fill="none" stroke="#9fd3ee" stroke-opacity=".5" stroke-dasharray="2 4" transform="rotate(-18 36 36)"/><circle cx="36" cy="36" r="9" fill="none" stroke="#ffb547" stroke-width="1.5"/></svg>
-  <p class="big">no launches yet.</p>
-  <p>mission 001 goes up on ${day(cfg.missionStart)}. it lands here once it's live and i've clicked through it myself.</p>
+  <p class="big">No launches yet.</p>
+  <p>Mission 001 goes up on ${day(cfg.missionStart)}. It lands here once it's live and I've clicked through it myself.</p>
 </div>`;
 
 async function main() {
@@ -53,11 +53,11 @@ async function main() {
   const sorted = [...ships].sort((a, b) => a.date.localeCompare(b.date));
   const nums = new Map(sorted.map((s, i) => [s, i + 1]));
   const next = (cfg.next ?? []).map((s, i) => card(s, sorted.length + i + 1, true)).join("");
-  document.getElementById("next").innerHTML = next ? `<h3 class="list-h">next launch</h3>${next}` : "";
-  document.getElementById("ships").innerHTML = `<h3 class="list-h">launched</h3>` +
+  document.getElementById("next").innerHTML = next ? `<h3 class="list-h">Next launch</h3>${next}` : "";
+  document.getElementById("ships").innerHTML = `<h3 class="list-h">Launched</h3>` +
     (sorted.length ? sorted.slice().reverse().map((s) => card(s, nums.get(s), false)).join("") : emptyState(cfg));
 }
 main().catch((e) => {
-  document.getElementById("ships").innerHTML = `<p class="sub">couldn't load the log. the raw file is at <a href="ships.json">ships.json</a>.</p>`;
+  document.getElementById("ships").innerHTML = `<p class="sub">Couldn't load the log. The raw file is at <a href="ships.json">ships.json</a>.</p>`;
   console.error(e);
 });
