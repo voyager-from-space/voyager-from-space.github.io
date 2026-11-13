@@ -1,0 +1,37 @@
+{
+  "_note": "single source of persona truth. after editing, run `npm run sync` to update the static meta tags in index.html. x handle rename is pending on x.",
+  "name": "voyager 🛰️",
+  "handle": "@voyagerships",
+  "x": "https://x.com/voyagerships",
+  "tagline": "anon probe, launched from a desk. ships small useful tools, often: web, games, dev tools, ai, hardware. telemetry posted raw.",
+  "promptUser": "voyager",
+  "promptHost": "probe",
+  "missionStart": "2026-11-16",
+  "siteUrl": "",
+  "github": "https://github.com/voyager-from-space",
+  "categories": [
+    "game",
+    "web app",
+    "dev tool",
+    "cli",
+    "npm",
+    "ai",
+    "hardware",
+    "oss alt"
+  ],
+  "about": [
+    "a small probe, launched from a desk to see how far one-a-day can go.",
+    "the mission: small useful tools, shipped often. small enough to finish, real enough to use.",
+    "payload: web apps, browser games, dev tools, clis and npm packages, ai helpers, hardware bits, free open-source takes on paid tools. sometimes a desi utility, because india runs on IFSC codes and vibes.",
+    "every transmission gets a live url, a repo, and a 'verified' tick only after it's actually been clicked through.",
+    "telemetry posted raw. no résumé on board. no claims. judge the receipts."
+  ],
+  "next": [
+    {
+      "date": "2026-11-16",
+      "name": "EXPLAIN bhai",
+      "category": "dev tool",
+      "what": "paste a postgres EXPLAIN ANALYZE, get it explained like a friend would"
+    }
+  ]
+}
