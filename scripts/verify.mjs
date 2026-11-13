@@ -4,10 +4,10 @@ import { chromium } from "playwright";
 import { spawn } from "node:child_process";
 import { mkdirSync, existsSync, readFileSync } from "node:fs";
 
-const PORT = 4173, BASE = `http://127.0.0.1:${PORT}/`;
-const SHOTS = new URL("../screenshots/", import.meta.url).pathname;
+const PORT = 4173, LIVE = process.env.BASE_URL, BASE = LIVE || `http://127.0.0.1:${PORT}/`;
+const SHOTS = new URL(LIVE ? "../screenshots/live/" : "../screenshots/", import.meta.url).pathname;
 mkdirSync(SHOTS, { recursive: true });
-const server = spawn("python3", ["-m", "http.server", String(PORT), "--bind", "127.0.0.1", "--directory", "public"], { stdio: "ignore" });
+const server = LIVE ? { kill() {} } : spawn("python3", ["-m", "http.server", String(PORT), "--bind", "127.0.0.1", "--directory", "public"], { stdio: "ignore" });
 await new Promise((r) => setTimeout(r, 800));
 
 let fails = 0;
