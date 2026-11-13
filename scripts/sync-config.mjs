@@ -18,7 +18,7 @@ const lines = [
   `<meta property="og:image" content="${esc(img)}">`,
   `<meta property="og:image:width" content="1200">`,
   `<meta property="og:image:height" content="630">`,
-  `<meta property="og:image:alt" content="${esc(plain)} mission log: amber telemetry console">`,
+  `<meta property="og:image:alt" content="${esc(plain + ": an amber record on a navy starfield. useful little tools, shipped often and in public.")}">`,
   `<meta name="twitter:card" content="summary_large_image">`,
   `<meta name="twitter:image" content="${esc(img)}">`,
   `<meta name="twitter:site" content="${esc(cfg.handle)}">`,

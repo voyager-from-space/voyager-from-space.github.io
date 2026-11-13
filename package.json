@@ -2,7 +2,7 @@
   "name": "anon-ships",
   "version": "0.1.0",
   "private": true,
-  "description": "a terminal-style log of one tiny product shipped every day. static, no backend, no trackers.",
+  "description": "voyager mission log. static site, no backend, no trackers.",
   "author": "voyager",
   "license": "MIT",
   "type": "module",
