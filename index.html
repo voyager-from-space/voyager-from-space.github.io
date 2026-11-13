@@ -5,99 +5,149 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- sync:start (generated from site.config.json by `npm run sync`; edit the config, not this block) -->
 <title>voyager 🛰️ ~ mission log</title>
-<meta name="description" content="anon probe, launched from a desk. ships small useful tools, often: web, games, dev tools, ai, hardware. telemetry posted raw.">
+<meta name="description" content="anon builder shipping useful little tools for everyone, often and in public. web apps, games, dev tools, clis, ai helpers, hardware. open code, raw numbers.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="voyager 🛰️ ~ mission log">
-<meta property="og:description" content="anon probe, launched from a desk. ships small useful tools, often: web, games, dev tools, ai, hardware. telemetry posted raw.">
+<meta property="og:description" content="anon builder shipping useful little tools for everyone, often and in public. web apps, games, dev tools, clis, ai helpers, hardware. open code, raw numbers.">
 <meta property="og:url" content="https://voyager-from-space.github.io">
 <link rel="canonical" href="https://voyager-from-space.github.io">
 <meta property="og:image" content="https://voyager-from-space.github.io/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="voyager mission log: amber telemetry console">
+<meta property="og:image:alt" content="voyager: an amber record on a navy starfield. useful little tools, shipped often and in public.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://voyager-from-space.github.io/og-image.png">
 <meta name="twitter:site" content="@voyagerships">
 <meta name="twitter:title" content="voyager 🛰️ ~ mission log">
-<meta name="twitter:description" content="anon probe, launched from a desk. ships small useful tools, often: web, games, dev tools, ai, hardware. telemetry posted raw.">
+<meta name="twitter:description" content="anon builder shipping useful little tools for everyone, often and in public. web apps, games, dev tools, clis, ai helpers, hardware. open code, raw numbers.">
 <!-- sync:end -->
-<meta name="theme-color" content="#0a0906">
+<meta name="theme-color" content="#070b16">
+<meta name="color-scheme" content="dark">
 <meta name="referrer" content="no-referrer">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preload" href="fonts/plexmono-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/vt323.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/plexsans-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<a class="skip" href="#shiplog">skip to the mission log</a>
-<div class="stars" aria-hidden="true"></div>
-<div class="crt" aria-hidden="true"></div>
+<a class="skip" href="#main">skip to content</a>
+<div class="sky" aria-hidden="true"></div>
 
-<header class="bar">
-  <span class="bar-l"><span class="led" aria-hidden="true"></span><span id="bar-who">voyager@probe</span></span>
-  <span class="bar-m" id="bar-stats">transmissions: 0</span>
-  <span class="bar-r"><span id="met">T-?</span> &middot; <span id="clock">--:--</span> ist</span>
+<header class="top wrap">
+  <a class="brand" href="./" aria-label="voyager, home">
+    <svg class="brand-mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><circle cx="16" cy="16" r="14.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="10" fill="none" stroke="currentColor" stroke-opacity=".5"/><circle cx="16" cy="16" r="5" fill="#ffb547"/><circle cx="16" cy="16" r="1.3" fill="#070b16"/></svg>
+    <span>voyager</span>
+  </a>
+  <nav aria-label="sections">
+    <a href="#log">mission log</a>
+    <a href="#manifesto">manifesto</a>
+  </nav>
 </header>
 
-<div id="example-banner" class="example-banner" hidden>
-  previewing <b>ships.example.json</b> &mdash; fake test data, not real transmissions. <a href="./">back to the real log</a>
-</div>
-
-<main class="wrap">
-  <section class="hero">
-    <p class="kicker" id="kicker">deep-space probe &middot; mission log</p>
-    <h1 class="banner"><img class="probe" src="avatar.png" width="400" height="400" alt=""><span id="name">voyager</span><span class="cursor" aria-hidden="true"></span></h1>
-    <p class="tagline" id="tagline">shipping 1 tiny product every day, in public. receipts only.</p>
+<main id="main">
+  <section class="hero wrap" aria-labelledby="hero-h">
+    <div class="hero-text">
+      <p class="label">anon builder &middot; mission log</p>
+      <h1 id="hero-h">useful little tools for everyone, shipped often and in&nbsp;public.</h1>
+      <p class="lede">i'm voyager. i build web apps, browser games, dev tools, clis, ai helpers, hardware bits and free versions of paid tools. each one ships with its code and its real numbers. there's no name or résumé here, only the launches.</p>
+      <p class="cta">
+        <a class="btn" href="#log">see the mission log</a>
+        <a class="link" href="https://x.com/voyagerships" rel="me noopener">follow @voyagerships</a>
+      </p>
+    </div>
+    <figure class="record" aria-hidden="true">
+      <svg viewBox="0 0 400 400" width="400" height="400">
+        <ellipse class="orbit" cx="200" cy="200" rx="196" ry="70" transform="rotate(-18 200 200)"/>
+        <circle cx="200" cy="200" r="150" fill="#0d1526"/>
+        <g class="grooves">
+          <circle cx="200" cy="200" r="148"/><circle cx="200" cy="200" r="138"/><circle cx="200" cy="200" r="128"/>
+          <circle cx="200" cy="200" r="118"/><circle cx="200" cy="200" r="108"/><circle cx="200" cy="200" r="98"/>
+          <circle cx="200" cy="200" r="88"/><circle cx="200" cy="200" r="78"/><circle cx="200" cy="200" r="68"/>
+        </g>
+        <path class="sheen" d="M200 58 A142 142 0 0 1 323 129"/>
+        <path class="sheen thin" d="M200 92 A108 108 0 0 1 294 146"/>
+        <path class="sheen thin" d="M77 271 A142 142 0 0 0 120 318"/>
+        <g class="disc">
+          <circle cx="200" cy="200" r="52" fill="#ffb547"/>
+          <circle cx="200" cy="200" r="44" fill="none" stroke="#070b16" stroke-opacity=".22"/>
+          <path d="M200 156 v18 M200 226 v18 M156 200 h18 M226 200 h18" stroke="#070b16" stroke-opacity=".45" stroke-width="2"/>
+          <circle cx="200" cy="200" r="5" fill="#070b16"/>
+        </g>
+        <path class="orbit" d="M4 200 A196 70 0 0 0 396 200" transform="rotate(-18 200 200)"/>
+        <circle class="probe" cx="396" cy="200" r="4.5" transform="rotate(-18 200 200)"/>
+      </svg>
+    </figure>
   </section>
 
-  <div class="grid">
-    <section class="term" aria-label="probe console">
-      <div class="term-head">
-        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="term-title" id="term-title">probe console &mdash; uplink open</span>
-        <span class="term-hint">type <kbd>help</kbd></span>
-      </div>
-      <div class="term-body" id="term-body">
-        <div id="out" class="out" role="log" aria-live="polite"></div>
-        <form id="prompt-form" class="prompt" autocomplete="off">
-          <label for="cmd" class="ps1" id="ps1">voyager@probe:~$</label>
-          <input id="cmd" name="cmd" type="text" spellcheck="false" autocapitalize="off" autocorrect="off" enterkeyhint="go" aria-label="console command">
-        </form>
-      </div>
-      <nav class="chips" aria-label="quick commands">
-        <button type="button" data-cmd="help">help</button>
-        <button type="button" data-cmd="cat about">about</button>
-        <button type="button" data-cmd="log">log</button>
-        <button type="button" data-cmd="next">next</button>
-        <button type="button" data-cmd="ping earth">ping</button>
-        <button type="button" data-cmd="x">x &#8599;</button>
-        <button type="button" data-cmd="chai">chai</button>
-        <button type="button" data-cmd="clear">clear</button>
-      </nav>
-    </section>
-
-    <aside class="side">
-      <pre class="receipt" id="receipt" aria-label="telemetry"></pre>
-      <section class="file" aria-labelledby="next-h">
-        <h2 class="file-h" id="next-h"><span>next transmission</span><span class="tag tag-plan">planned &middot; not shipped</span></h2>
-        <ol class="next" id="next-list"></ol>
-      </section>
-    </aside>
-  </div>
-
-  <section class="file shiplog" id="shiplog" aria-labelledby="log-h">
-    <h2 class="file-h" id="log-h"><span>mission.log</span><span class="tag" id="log-src">source: ships.json</span></h2>
-    <div id="log"></div>
+  <section class="how wrap" aria-labelledby="how-h">
+    <h2 id="how-h" class="label">how it works</h2>
+    <ol class="steps">
+      <li>
+        <span class="num" aria-hidden="true">01</span>
+        <h3>mission numbers</h3>
+        <p>each launch gets the next number, starting at 001. numbers never get reused, even if the launch flops.</p>
+      </li>
+      <li>
+        <span class="num" aria-hidden="true">02</span>
+        <h3>open code</h3>
+        <p>every tool has a public repo under <a href="https://github.com/voyager-from-space" rel="noopener">voyager-from-space</a>. read it, fork it, open an issue.</p>
+      </li>
+      <li>
+        <span class="num" aria-hidden="true">03</span>
+        <h3>raw numbers</h3>
+        <p>if i post a number, i measured it. load times, file sizes, users, bugs. the bad ones get posted too.</p>
+      </li>
+    </ol>
   </section>
 
-  <footer class="foot">
-    <p>no trackers. no cookies. no résumé. one json file and a habit.</p>
-    <p class="foot-links"><a id="foot-x" href="https://x.com/voyagerships" rel="me noopener">x.com/voyagerships</a> <a id="foot-gh" href="https://github.com/voyager-from-space" rel="me noopener">github.com/voyager-from-space</a></p>
-  </footer>
+  <section class="log wrap" id="log" aria-labelledby="log-h" tabindex="-1">
+    <div class="sec-head">
+      <h2 id="log-h">mission log</h2>
+      <p class="sub">newest first. the whole log is one file, <a href="ships.json" id="log-src">ships.json</a>.</p>
+    </div>
+    <div id="example-banner" class="example-banner" role="note" hidden>
+      you're looking at <b>ships.example.json</b>, fake test data. <a href="./#log">back to the real log</a>
+    </div>
+    <div id="next"></div>
+    <div id="ships"><p class="sub">loading the log&hellip;</p></div>
+    <noscript><p class="sub">the log needs javascript to draw. the raw data is at <a href="ships.json">ships.json</a>. next up: mission 001, texdiet, 16 nov 2026 (planned, not shipped).</p></noscript>
+  </section>
+
+  <section class="manifesto wrap" id="manifesto" aria-labelledby="man-h">
+    <h2 id="man-h">manifesto</h2>
+    <div class="man-body">
+      <p>pick a problem people actually complain about. build the smallest thing that fixes it. ship it, link the code, post what happened. then start the next one.</p>
+      <p>the tools are free wherever i can make them free. no waitlists, no "coming soon" pages, and no sign-up wall in front of something that should just work.</p>
+    </div>
+    <div class="quotes">
+      <figure class="quote">
+        <blockquote><p>Look again at that dot. That's here. That's home. That's us.</p></blockquote>
+        <figcaption>Carl Sagan, <cite>Pale Blue Dot</cite> (1994)</figcaption>
+      </figure>
+      <figure class="quote">
+        <blockquote><p>This is a present from a small distant world, a token of our sounds, our science, our images, our music, our thoughts, and our feelings.</p></blockquote>
+        <figcaption>Jimmy Carter, statement placed on the Voyager spacecraft (1977)</figcaption>
+      </figure>
+      <figure class="quote">
+        <blockquote><p>If you wish to make an apple pie from scratch, you must first invent the universe.</p></blockquote>
+        <figcaption>Carl Sagan, <cite>Cosmos</cite> (1980)</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="links wrap" id="links" aria-labelledby="links-h">
+    <h2 id="links-h" class="label">follow the probe</h2>
+    <ul class="link-list">
+      <li><a href="https://x.com/voyagerships" rel="me noopener" id="link-x"><span class="where">x</span><span class="what">@voyagerships</span><span class="why">launch posts and numbers</span></a></li>
+      <li><a href="https://github.com/voyager-from-space" rel="me noopener" id="link-gh"><span class="where">github</span><span class="what">voyager-from-space</span><span class="why">all the code</span></a></li>
+    </ul>
+  </section>
 </main>
 
-<noscript><p class="noscript">this site is a probe console and consoles need javascript. the log lives at <a href="ships.json">ships.json</a>.</p></noscript>
+<footer class="foot wrap">
+  <p>static site. no trackers, no cookies, no analytics.</p>
+</footer>
 <script src="app.js" defer></script>
 </body>
 </html>
