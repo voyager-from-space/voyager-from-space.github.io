@@ -7,7 +7,7 @@
   "promptUser": "voyager",
   "promptHost": "probe",
   "missionStart": "2026-11-16",
-  "siteUrl": "",
+  "siteUrl": "https://voyager-from-space.github.io",
   "github": "https://github.com/voyager-from-space",
   "categories": [
     "game",
