@@ -1,8 +1,8 @@
 {
-  "name": "anon-ships",
+  "name": "voyager-portfolio",
   "version": "0.1.0",
   "private": true,
-  "description": "voyager mission log. static site, no backend, no trackers.",
+  "description": "voyager portfolio. static page, no backend, no trackers.",
   "author": "voyager",
   "license": "MIT",
   "type": "module",

@@ -1,28 +1,15 @@
 {
-  "_note": "single source of persona truth. after editing, run `npm run sync` to update the static meta tags in index.html.",
-  "name": "voyager 🛰️",
+  "_note": "single source of persona truth. after editing, run `npm run sync` to update the static meta tags and prerendered cards in index.html.",
+  "name": "voyager",
   "handle": "@voyagerships",
   "x": "https://x.com/voyagerships",
-  "tagline": "anon builder shipping useful little tools for everyone, often and in public. web apps, games, dev tools, clis, ai helpers, hardware. open code, raw numbers.",
-  "missionStart": "2026-11-16",
-  "siteUrl": "https://voyager-from-space.github.io",
   "github": "https://github.com/voyager-from-space",
-  "categories": [
-    "game",
-    "web app",
-    "dev tool",
-    "cli",
-    "npm",
-    "ai",
-    "hardware",
-    "oss alt"
-  ],
+  "siteUrl": "https://voyager-from-space.github.io",
+  "tagline": "A nerdy shipper of free, in-browser tools. Open code, measured numbers.",
   "next": [
     {
-      "date": "2026-11-16",
-      "name": "texdiet",
-      "category": "oss alt",
-      "what": "drop your latex project zip, see why it blows the free 10s compile limit, get a lighter zip back. all in the browser."
+      "name": "blindsanitize",
+      "what": "Checks a paper for whatever gives away its authors before a double-blind submission. Nothing to try yet."
     }
   ]
 }

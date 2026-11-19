@@ -60,13 +60,13 @@ _, px, py = pts[0]; d.ellipse([px - 7 * S, py - 7 * S, px + 7 * S, py + 7 * S], 
 
 x0 = 80 * S
 fm = ImageFont.truetype(MONO, 22 * S)
-d.text((x0, 92 * S), "ANON BUILDER  ·  MISSION LOG", font=fm, fill=AMBER)
+d.text((x0, 92 * S), "A NERDY SHIPPER", font=fm, fill=AMBER)
 fh = sans(68, 600)
-for i, line in enumerate(["useful little tools,", "shipped often and", "in public."]):
+for i, line in enumerate(["free tools that", "run in your", "browser."]):
     d.text((x0 - 3 * S, 150 * S + i * 80 * S), line, font=fh, fill=INK)
 fb = sans(28, 400)
-d.text((x0, 420 * S), "web apps · games · dev tools · ai · hardware", font=fb, fill=MUTED)
-d.text((x0, 470 * S), "open code. raw numbers.", font=fb, fill=MUTED)
+d.text((x0, 420 * S), "nothing to install, nothing uploaded.", font=fb, fill=MUTED)
+d.text((x0, 470 * S), "open code. measured numbers.", font=fb, fill=MUTED)
 d.text((x0, 548 * S), f"{name}  ·  {cfg['handle']}", font=ImageFont.truetype(MONO, 24 * S), fill=ICE)
 im.resize((1200, 630), Image.LANCZOS).save(root / "public/og-image.png", optimize=True)
 

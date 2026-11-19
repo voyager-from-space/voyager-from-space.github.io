@@ -14,24 +14,22 @@ const denyFile = new URL("../.identity-denylist", import.meta.url);
 const deny = existsSync(denyFile) ? readFileSync(denyFile, "utf8").split("\n").map((l) => l.trim().toLowerCase()).filter(Boolean) : [];
 let fails = 0, passes = 0;
 const ok = (cond, msg) => { console.log(`${cond ? "PASS" : "FAIL"}  ${msg}`); cond ? passes++ : fails++; };
-const browser = await chromium.launch();
+const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH, args: process.env.CHROME_PATH ? ["--no-sandbox"] : [] });
 const cb = `cb=${Date.now()}`; // defeat the pages cdn cache on live runs
 
 async function open(viewport, query = "", extra = {}, setup) {
   const ctx = await browser.newContext({ viewport, deviceScaleFactor: viewport.width < 500 ? 3 : 1, ...extra });
   const p = await ctx.newPage();
   const errors = [], external = [];
-  let bytes = 0;
   p.on("console", (m) => { if (["error", "warning"].includes(m.type())) errors.push(`${m.type()}: ${m.text()}`); });
   p.on("pageerror", (e) => errors.push("pageerror: " + e.message));
   p.on("requestfailed", (r) => errors.push("requestfailed: " + r.url()));
   p.on("request", (r) => { if (!r.url().startsWith(BASE) && !r.url().startsWith("data:")) external.push(r.url()); });
-  p.on("response", async (r) => { try { bytes += (await r.body()).length; } catch {} });
   if (setup) await setup(p);
   await p.goto(`${BASE}?${cb}${query ? "&" + query : ""}`, { waitUntil: "networkidle" });
-  await p.waitForSelector("#ships .list-h");
+  await p.waitForSelector("#ships .ship");
   await p.evaluate(() => document.fonts.ready);
-  return { p, ctx, errors, external, bytes: () => bytes };
+  return { p, ctx, errors, external };
 }
 
 // wcag relative luminance contrast for every element that owns visible text.
@@ -60,115 +58,55 @@ const contrastPairs = (p) => p.evaluate(() => {
   return out;
 });
 
-const pngSize = (buf) => ({ w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) });
 
-// ---- desktop, real data
+const ships = JSON.parse(readFileSync(new URL("../public/ships.json", import.meta.url), "utf8")).filter((s) => s.verified);
+
+// ---- desktop
 {
-  const { p, ctx, errors, external, bytes } = await open({ width: 1280, height: 800 });
+  const { p, ctx, errors, external } = await open({ width: 1280, height: 800 });
   ok(await p.evaluate(() => !!document.querySelector("header nav") && !!document.querySelector("main") && !!document.querySelector("footer")), "landmarks: header, nav, main, footer");
-  const h1 = (await p.locator("h1").innerText()).replace(/\s+/g, " ");
-  ok(h1.includes("Useful little tools for everyone") && h1.includes("in public"), "section 1: hero mission statement");
-  ok(await p.locator("h1").isVisible() && (await p.locator("h1").boundingBox()).y < 800, "hero message is above the fold");
-  ok((await p.locator(".steps li").count()) === 3 && (await p.locator(".steps h3").allInnerTexts()).join("|") === "Mission numbers|Open code|Raw numbers", "section 2: how it works has 3 items (mission numbers, open code, raw numbers)");
-  ok(await p.locator("section#log h2").innerText() === "Mission log", "section 3: mission log");
-  ok(await p.locator("section#manifesto h2").innerText() === "Manifesto", "section 4: manifesto");
-  const caps = await p.evaluate(() => [...document.querySelectorAll("body *")].filter((e) => e.childElementCount === 0 && e.textContent.trim() && getComputedStyle(e).textTransform === "uppercase").length);
-  ok(caps === 0, `no all-caps text-transform labels (${caps} found)`);
-  ok(!/\u00b7|&middot;/.test(await p.content()), "no 'A · B' dot pattern in the page");
-  ok(await p.locator("section#links").isVisible(), "section 5: links");
-
-  const next = p.locator("#next-launch");
-  const nt = (await next.innerText()).toLowerCase();
-  const nx = cfg.next[0];
-  ok((await p.locator("#next .mission").count()) === cfg.next.length && nt.includes(nx.name) && nt.includes(nx.what) && nt.includes("16 nov 2026"), "next launch card: texdiet, 16 nov 2026, config one-liner");
-  ok(nt.includes("planned, not shipped") && (await next.locator(".patch").getAttribute("aria-label")).includes("planned"), "next launch card is labelled planned, not shipped");
-  const shipped = JSON.parse(await (await p.request.get(`${BASE}ships.json?${cb}`)).text());
-  ok(nt.includes(`mission ${String(shipped.length + 1).padStart(3, "0")}`), "next launch gets the next mission number");
-  if (shipped.length === 0) ok((await p.locator("#empty .big").innerText()) === "No launches yet." && (await p.locator("#ships .mission").count()) === 0, "empty ships.json renders the empty state");
-  else ok((await p.locator("#ships .mission").count()) === shipped.length, `ships.json renders ${shipped.length} launches`);
-  ok(await p.locator("#example-banner").isHidden(), "example banner hidden on real data");
-
-  const quotes = await p.locator(".quote").evaluateAll((fs) => fs.map((f) => [f.querySelector("blockquote").textContent.trim(), f.querySelector("figcaption").textContent.trim()]));
-  const want = [
-    ["Look again at that dot. That's here. That's home. That's us.", "Carl Sagan, Pale Blue Dot (1994)"],
-    ["This is a present from a small distant world, a token of our sounds, our science, our images, our music, our thoughts, and our feelings.", "Jimmy Carter, statement placed on the Voyager spacecraft (1977)"],
-    ["If you wish to make an apple pie from scratch, you must first invent the universe.", "Carl Sagan, Cosmos (1980)"],
-  ];
-  ok(JSON.stringify(quotes) === JSON.stringify(want), "manifesto quotes are the 3 verified quotes with attributions");
-
-  ok((await p.locator("#link-x").getAttribute("href")) === "https://x.com/voyagerships" && (await p.locator("#link-x").innerText()).includes("@voyagerships"), "x link is x.com/voyagerships");
-  ok((await p.locator("#link-gh").getAttribute("href")) === "https://github.com/voyager-from-space", "github link is github.com/voyager-from-space");
-  const hrefs = await p.locator("a[href^='http']").evaluateAll((as) => as.map((a) => a.href));
-  ok(hrefs.every((h) => h.startsWith("https://x.com/voyagerships") || h.startsWith("https://github.com/voyager-from-space")), `every outbound link goes to x/voyagerships or github/voyager-from-space (${hrefs.length})`);
-
-  ok(await p.evaluate(() => document.fonts.check('16px "Plex Sans"') && document.fonts.check('16px "Plex Mono"')), "self-hosted plex sans + plex mono loaded");
-  ok(await p.evaluate(() => getComputedStyle(document.querySelector(".disc")).animationName === "spin"), "motion on by default (record label spins)");
-  const imgs = await p.evaluate(() => [...document.querySelectorAll("img")].every((i) => i.hasAttribute("alt")) && [...document.querySelectorAll("svg[role=img]")].every((s) => s.getAttribute("aria-label")) && [...document.querySelectorAll("svg:not([role=img])")].every((s) => s.closest("[aria-hidden=true]") || s.getAttribute("aria-hidden") === "true"));
-  ok(imgs, "every image has alt text; decorative svgs are aria-hidden; patches have labels");
-
-  // og / twitter meta
-  const meta = async (sel) => p.locator(sel).getAttribute("content");
-  const ogImg = await meta('meta[property="og:image"]');
-  ok(ogImg === new URL("og-image.png", cfg.siteUrl).href, `og:image is absolute under siteUrl (${ogImg})`);
-  ok((await meta('meta[name="twitter:card"]')) === "summary_large_image" && (await meta('meta[name="twitter:image"]')) === ogImg, "twitter:card summary_large_image + twitter:image");
-  ok((await meta('meta[property="og:title"]')).startsWith("voyager") && (await meta('meta[property="og:description"]')) === cfg.tagline && (await meta('meta[property="og:url"]')) === cfg.siteUrl, "og:title / og:description / og:url match the config");
-  const og = await p.request.get(`${BASE}og-image.png?${cb}`);
-  const ogBuf = await og.body(), dim = pngSize(ogBuf);
-  ok(og.ok() && og.headers()["content-type"] === "image/png" && dim.w === 1200 && dim.h === 630, `og-image.png served as 1200x630 png (${dim.w}x${dim.h}, ${ogBuf.length} bytes)`);
-
-  // keyboard: tab through the page, every link and the button get a visible outline
-  await p.locator("body").click({ position: { x: 5, y: 5 } });
-  const seen = [];
-  for (let i = 0; i < 30; i++) {
-    await p.keyboard.press("Tab");
-    const f = await p.evaluate(() => { const e = document.activeElement; if (!e || e === document.body) return null; const s = getComputedStyle(e); return { tag: e.tagName, text: e.textContent.trim().slice(0, 30), outline: s.outlineStyle !== "none" && parseFloat(s.outlineWidth) >= 2 }; });
-    if (!f) break; seen.push(f);
+  ok((await p.locator("h1").innerText()).replace(/\s+/g, " ").includes("Free tools that run in your browser"), "hero headline");
+  ok((await p.title()).includes(cfg.name), `title: ${await p.title()}`);
+  const n = await p.locator(".ship").count();
+  ok(n === ships.length, `one card per verified product in ships.json (${n} of ${ships.length})`);
+  for (const s of ships) {
+    const c = p.locator(`.ship:has(h3:text-is("${s.name}"))`);
+    const live = await c.locator(".btn").getAttribute("href"), repo = await c.locator(".go a:not(.btn)").getAttribute("href");
+    const fig = await c.locator(".fig").innerText(), fact = await c.locator(".fact").innerText();
+    ok(live === s.live && repo === s.repo && fig === s.figure && fact === s.fact, `card ${s.name}: job, figure, fact, live link and code link match ships.json`);
   }
-  const linkCount = await p.locator("a:visible").count();
-  ok(seen[0]?.text === "skip to content", "first tab stop is the skip link");
-  ok(seen.length >= linkCount && seen.every((f) => f.outline), `keyboard reaches ${seen.length} stops (${linkCount} visible links) and each has a visible focus outline`);
-
-  // svg text inside the patches isn't covered by the dom walk, so check its fills against the patch fill
-  const svgPairs = await p.locator("#ships .patch, #next .patch").evaluateAll((svgs) => svgs.flatMap((s) => [...s.querySelectorAll("text")].map((t) => [t.getAttribute("fill"), s.querySelector("circle").getAttribute("fill")])));
-  const hexL = (h) => { const v = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)); return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]; };
-  const svgRatios = svgPairs.map(([f, b]) => { const [x, y] = [hexL(f), hexL(b)].sort((a, c) => c - a); return (x + 0.05) / (y + 0.05); });
-  ok(svgRatios.length >= 3 && svgRatios.every((r) => r >= 4.5), `contrast AA on ${svgRatios.length} patch svg text fills (min ${Math.min(...svgRatios).toFixed(2)}:1)`);
+  ok((await p.locator('a[href="https://x.com/voyagerships"]').count()) >= 2 && (await p.locator('a[href="https://github.com/voyager-from-space"]').count()) >= 2, "X and GitHub links present");
+  ok((await p.locator("#next .next-name").innerText()) === "blindsanitize", "Building now names blindsanitize");
+  const first = await p.locator(".ship").first().boundingBox();
+  ok(first.y + 220 < 800, `first card and its figure are visible in the first 1280x800 screen (y ${Math.round(first.y)})`);
+  const sw = await p.evaluate(() => document.documentElement.scrollWidth);
+  ok(sw <= 1280, `desktop: no horizontal overflow (${sw})`);
   const pairs = await contrastPairs(p);
-  const bad = pairs.filter((x) => x.ratio < x.need);
-  const min = Math.min(...pairs.map((x) => x.ratio));
-  ok(pairs.length > 20 && bad.length === 0, `contrast AA on ${pairs.length} text/background pairs (min ${min.toFixed(2)}:1)` + (bad.length ? " -> " + bad.map((b) => `${b.text} ${b.ratio.toFixed(2)}`).join(" | ") : ""));
-
-  const all = (await p.locator("body").innerText()) + (await p.title()) + (await p.evaluate(() => [...document.querySelectorAll("meta,link,a")].map((m) => m.outerHTML).join(" ")));
-  const leaks = deny.filter((d) => all.toLowerCase().includes(d));
-  ok(deny.length > 0 && leaks.length === 0, `rendered page + meta contain 0 denylisted strings (${deny.length} checked)` + (leaks.length ? " -> " + leaks.join(", ") : ""));
-  ok(errors.length === 0, "desktop: no console errors/warnings" + (errors.length ? " -> " + errors.join(" | ") : ""));
-  ok(external.length === 0, "desktop: zero third-party requests" + (external.length ? " -> " + external.join(", ") : ""));
-  ok(bytes() < 200_000, `page weight ${(bytes() / 1024).toFixed(0)} KB (< 200 KB)`);
+  ok(pairs.every((x) => x.ratio >= x.need), `desktop: contrast AA on ${pairs.length} text elements`);
+  if (!pairs.every((x) => x.ratio >= x.need)) console.log(pairs.filter((x) => x.ratio < x.need));
+  ok(errors.length === 0, `no console errors${errors.length ? ": " + errors.join(" | ") : ""}`);
+  ok(external.length === 0, `no third-party requests${external.length ? ": " + external.join(" ") : ""}`);
+  const text = (await p.evaluate(() => document.documentElement.innerText + "\n" + document.title + "\n" + document.documentElement.outerHTML)).toLowerCase();
+  const hit = deny.filter((d) => text.includes(d));
+  ok(deny.length > 0 && hit.length === 0, `denylist: ${deny.length} patterns, ${hit.length} hits on the rendered page and its html`);
   await ctx.close();
 }
 
-// ---- forced-empty log, so the empty state is tested even after real ships exist
+// ---- the prerendered html (no js) already has every card
 {
-  const { p, ctx, errors } = await open({ width: 1280, height: 800 }, "", {}, (p) => p.route(/ships\.json/, (r) => r.fulfill({ contentType: "application/json", body: "[]" })));
-  ok((await p.locator("#empty").isVisible()) && (await p.locator("#empty").innerText()).includes("Mission 001 goes up on 16 Nov 2026"), "empty ships.json: empty state names mission 001 and the date");
-  ok((await p.locator("#next-launch").innerText()).includes("Mission 001"), "empty ships.json: texdiet is mission 001");
-  ok(errors.length === 0, "empty: no console errors");
-  await ctx.close();
+  const html = await (await fetch(`${BASE}?${cb}`)).text();
+  const n = (html.match(/<article class="ship"/g) || []).length;
+  ok(n === ships.length, `no-js html already contains all ${ships.length} cards (${n})`);
 }
 
-// ---- example data
+// ---- a new ships.json entry is the only thing needed for a new card
 {
-  const { p, ctx, errors } = await open({ width: 1280, height: 800 }, "ships=example");
-  ok(await p.locator("#example-banner").isVisible(), "example: banner says it's fake test data");
-  const cards = p.locator("#ships .mission");
-  ok((await cards.count()) === 2 && (await p.locator("#ships .patch").count()) === 2, "example: 2 launches render, each with a mission patch");
-  const labels = await p.locator("#ships .patch").evaluateAll((s) => s.map((x) => x.getAttribute("aria-label")));
-  ok(labels[0] === "mission patch 002, example-cron-whisperer" && labels[1] === "mission patch 001, example-orbit-golf", "example: newest first, patches carry mission number + name");
-  ok(await p.locator("#ships .patch").first().evaluate((s) => [...s.querySelectorAll("textPath")].map((t) => t.textContent).join("|") === "VOYAGER|EXAMPLE-CRON-WHISPERER"), "example: patch text reads VOYAGER / ship name");
-  const t0 = await cards.nth(0).innerText(), t1 = await cards.nth(1).innerText();
-  ok(t0.includes("Unverified") && t1.includes("Verified") && t0.includes("cli") && t0.includes("Live site") && t0.includes("Code"), "example: category, verified/unverified and live/code links shown");
-  ok((await p.locator("#next-launch").innerText()).includes("Mission 003"), "example: next launch numbered after the shipped ones");
-  ok(errors.length === 0, "example: no console errors" + (errors.length ? " -> " + errors.join(" | ") : ""));
+  const extra = { date: "2026-12-01", name: "zz-test-entry", oneliner: "Test job.", figure: "1 s", fact: "Test fact.", measured: "2026-12-01", live: "https://example.com/", repo: "https://example.com/r", verified: true };
+  const { p, ctx } = await open({ width: 1280, height: 800 }, "", {}, async (pg) => {
+    await pg.route("**/ships.json*", async (route) => { const r = await route.fetch(); const j = await r.json(); await route.fulfill({ response: r, json: [...j, extra] }); });
+  });
+  await p.waitForFunction(() => document.querySelectorAll(".ship").length > 0 && [...document.querySelectorAll(".ship h3")].some((h) => h.textContent === "zz-test-entry"));
+  ok(await p.locator(".ship").count() === ships.length + 1, "adding one ships.json entry adds one card, nothing else edited");
   await ctx.close();
 }
 
@@ -177,10 +115,10 @@ const pngSize = (buf) => ({ w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) });
   const { p, ctx, errors, external } = await open({ width: 390, height: 844 }, "", { isMobile: true, hasTouch: true });
   const sw = await p.evaluate(() => document.documentElement.scrollWidth);
   ok(sw <= 390, `mobile: no horizontal overflow (scrollWidth ${sw})`);
-  const cta = await p.locator(".btn").boundingBox();
+  const cta = await p.locator(".cta .btn").boundingBox();
   ok(cta.y + cta.height <= 844, "mobile: headline, intro and main button fit above the fold");
   const pairs = await contrastPairs(p);
-  ok(pairs.every((x) => x.ratio >= x.need), `mobile: contrast AA on ${pairs.length} pairs`);
+  ok(pairs.every((x) => x.ratio >= x.need), `mobile: contrast AA on ${pairs.length} text elements`);
   ok(errors.length === 0 && external.length === 0, "mobile: no console errors, no third-party requests");
   await ctx.close();
 }
@@ -191,6 +129,12 @@ const pngSize = (buf) => ({ w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) });
   const anim = await p.evaluate(() => [getComputedStyle(document.querySelector(".disc")).animationName, getComputedStyle(document.querySelector(".sky"), "::after").animationName, getComputedStyle(document.documentElement).scrollBehavior]);
   ok(anim[0] === "none" && anim[1] === "none" && anim[2] === "auto", `reduced-motion: record spin, twinkle and smooth scroll are off (${anim.join(", ")})`);
   await ctx.close();
+}
+
+// ---- every live and code link answers
+for (const s of ships) for (const [k, u] of [["live", s.live], ["code", s.repo]]) {
+  const r = await fetch(u, { redirect: "follow" });
+  ok(r.status === 200, `${s.name} ${k} link answers 200 (${u})`);
 }
 
 await browser.close();

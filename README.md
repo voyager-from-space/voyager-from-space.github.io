@@ -1,67 +1,61 @@
-# voyager mission log
+# voyager portfolio
 
-The site at https://voyager-from-space.github.io. An anon builder's log of small useful tools,
-one launch per mission number. Static HTML, CSS and JS, with no build step, no backend and no trackers.
-Fonts are self-hosted.
+The one-pager at https://voyager-from-space.github.io. Free, in-browser tools, one card each.
+Static HTML, CSS and JS. No backend, no trackers, no analytics. Fonts are self-hosted.
 
 ```
 public/
-  index.html          the page. the meta block is generated, see "persona"
-  styles.css          navy + amber + ice. all motion is off under prefers-reduced-motion
-  app.js              draws the mission log and the mission patches from ships.json
-  site.config.json    persona: name, handle, links, tagline, categories, next launch
-  ships.json          the mission log. single source of truth. starts empty
-  ships.example.json  2 fake entries for testing only. never live data
-  fonts/              IBM's unmodified Plex Sans + Plex Mono woff2 (OFL 1.1, see fonts/OFL.txt)
-  og-image.png        1200x630 share card; favicon-32.png + apple-touch-icon.png
+  index.html          the page. three marked blocks are generated, see "sync"
+  styles.css          navy, amber, ice. motion is off under prefers-reduced-motion
+  render.js           card markup, shared by the browser and sync-config.mjs
+  app.js              re-renders the cards from ships.json in the browser
+  site.config.json    name, handle, links, tagline, "Building now" lines
+  ships.json          the product list. the single source of truth
+  ships.example.json  one fake entry showing every field, test only. open /?ships=example
+  fonts/              IBM Plex Sans and Mono woff2 (OFL 1.1, see fonts/OFL.txt)
+  og-image.png        1200x630 share card, plus favicon-32.png and apple-touch-icon.png
 scripts/
-  sync-config.mjs     writes the title/og/twitter meta in index.html from the config
-  validate.mjs        checks ships.json shape
+  sync-config.mjs     writes the meta tags, the cards and the next lines into index.html
+  validate.mjs        checks the shape of ships.json
   check-identity.sh   greps the project for strings that must never ship
-  verify.mjs          playwright end-to-end checks (BASE_URL=... for the live site)
-  shoot.mjs           desktop + mobile screenshots of any url
-  make-og.py          redraws og-image.png and the icons (pillow)
+  verify.mjs          Playwright checks, desktop and mobile (BASE_URL=... for the live site)
+  make-og.py          redraws og-image.png and the icons (Pillow)
 ```
 
-## log a launch
+## add a product
 
-append one object to `public/ships.json`:
+Add one object to `public/ships.json`, then run `npm run sync` so the no-JS html matches.
+The browser draws the cards from `ships.json` on its own, so the page is correct as soon as the file is pushed.
 
 ```json
 {
-  "date": "2026-11-16",
-  "name": "texdiet",
-  "category": "oss alt",
-  "oneliner": "drop your latex project zip, see why it blows the free 10s compile limit, get a lighter zip back.",
+  "date": "2026-11-19",
+  "name": "maketitle",
+  "oneliner": "The job it does, in one sentence.",
+  "figure": "4.76 s",
+  "fact": "One measured fact, with what was measured.",
+  "measured": "2026-11-19",
+  "note": "Optional. One caveat a reader should know.",
   "live": "https://...",
   "repo": "https://...",
   "verified": true
 }
 ```
 
-- `category` must be one of `categories` in `site.config.json`.
-- `verified` is `true` only after the live url was actually clicked through.
-- mission numbers come from date order: the oldest launch is 001.
-- when a launch from `next` ships, remove it from `next`.
-- run `npm run check` (shape + identity grep) and `npm run verify`, commit, push.
+- `date` only sets the order, newest first.
+- `figure` is the short number shown large. `fact` says what it measures. `measured` is the day you measured it.
+- Only `verified: true` entries are shown, and they need a `fact`. Set it after you click through the live link.
+- When a product leaves "Building now", remove it from `next` in `site.config.json`.
+- Run `npm run check` (shape plus identity grep), then `CHROME_PATH=/usr/bin/google-chrome npm run verify` if Playwright has no browser of its own.
 
-`/?ships=example` loads `ships.example.json` with a "fake test data" banner.
+## sync
 
-## persona
-
-name, handle, links and tagline live in `public/site.config.json`. after a change run
-`npm run sync` (meta tags) and `python3 scripts/make-og.py` (share card).
-
-## run locally
-
-```
-npm run serve     # http://localhost:4173 (fetch() needs a server)
-npm run verify    # needs playwright + chromium
-```
+`npm run sync` rewrites three marked blocks in `index.html` from `site.config.json` and `ships.json`:
+title and share meta, one card per verified product, and the "Building now" lines.
 
 ## deploy
 
-github pages serves the `gh-pages` branch, which is `public/` split out:
+GitHub Pages serves the `gh-pages` branch, which is `public/` split out:
 
 ```
 git subtree split --prefix public -b gh-pages-new && git push origin gh-pages-new:gh-pages --force
@@ -69,4 +63,4 @@ git subtree split --prefix public -b gh-pages-new && git push origin gh-pages-ne
 
 ## license
 
-code MIT (see LICENSE). fonts OFL 1.1 (see public/fonts/OFL.txt).
+Code MIT (see LICENSE). Fonts OFL 1.1 (see public/fonts/OFL.txt).
