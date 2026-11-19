@@ -4,23 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- sync:start (generated from site.config.json by `npm run sync`; edit the config, not this block) -->
-<title>voyager 🛰️ ~ mission log</title>
-<meta name="description" content="anon builder shipping useful little tools for everyone, often and in public. web apps, games, dev tools, clis, ai helpers, hardware. open code, raw numbers.">
+<title>voyager: free tools that run in your browser</title>
+<meta name="description" content="A nerdy shipper of free, in-browser tools. Open code, measured numbers.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="voyager 🛰️ ~ mission log">
-<meta property="og:description" content="anon builder shipping useful little tools for everyone, often and in public. web apps, games, dev tools, clis, ai helpers, hardware. open code, raw numbers.">
+<meta property="og:title" content="voyager: free tools that run in your browser">
+<meta property="og:description" content="A nerdy shipper of free, in-browser tools. Open code, measured numbers.">
 <meta property="og:url" content="https://voyager-from-space.github.io">
 <link rel="canonical" href="https://voyager-from-space.github.io">
 <meta property="og:image" content="https://voyager-from-space.github.io/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="voyager: an amber record on a navy starfield. useful little tools, shipped often and in public.">
+<meta property="og:image:alt" content="voyager: an amber record on a navy starfield.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://voyager-from-space.github.io/og-image.png">
 <meta name="twitter:site" content="@voyagerships">
-<meta name="twitter:title" content="voyager 🛰️ ~ mission log">
-<meta name="twitter:description" content="anon builder shipping useful little tools for everyone, often and in public. web apps, games, dev tools, clis, ai helpers, hardware. open code, raw numbers.">
-<!-- sync:end -->
+<meta name="twitter:title" content="voyager: free tools that run in your browser">
+<meta name="twitter:description" content="A nerdy shipper of free, in-browser tools. Open code, measured numbers.">
+    <!-- sync:end -->
 <meta name="theme-color" content="#070b16">
 <meta name="color-scheme" content="dark">
 <meta name="referrer" content="no-referrer">
@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<a class="skip" href="#main">skip to content</a>
+<a class="skip" href="#main">Skip to content</a>
 <div class="sky" aria-hidden="true"></div>
 
 <header class="top wrap">
@@ -39,20 +39,21 @@
     <svg class="brand-mark" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><circle cx="16" cy="16" r="14.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="16" r="10" fill="none" stroke="currentColor" stroke-opacity=".5"/><circle cx="16" cy="16" r="5" fill="#ffb547"/><circle cx="16" cy="16" r="1.3" fill="#070b16"/></svg>
     <span>voyager</span>
   </a>
-  <nav aria-label="sections">
-    <a href="#log">Mission log</a>
-    <a href="#manifesto">Manifesto</a>
+  <nav aria-label="Sections and links">
+    <a href="#shipped">Shipped</a>
+    <a href="https://x.com/voyagerships" rel="me noopener">X</a>
+    <a href="https://github.com/voyager-from-space" rel="me noopener">GitHub</a>
   </nav>
 </header>
 
 <main id="main">
   <section class="hero wrap" aria-labelledby="hero-h">
     <div class="hero-text">
-      <h1 id="hero-h">Useful little tools for everyone, shipped often and in&nbsp;public.</h1>
-      <p class="lede">I'm voyager. I build web apps, browser games, dev tools, CLIs, AI helpers, hardware bits and free versions of paid tools. Each one ships with its code and its real numbers. There's no name or résumé here, only the launches.</p>
+      <h1 id="hero-h">Free tools that run in your&nbsp;browser.</h1>
+      <p class="lede">I'm voyager, a nerdy shipper. Nothing to install, nothing uploaded, and the code is public. Every number below was measured on the live tool, with the date next to it.</p>
       <p class="cta">
-        <a class="btn" href="#log">See the mission log</a>
-        <a class="link" href="https://x.com/voyagerships" rel="me noopener">Follow @voyagerships</a>
+        <a class="btn" href="#shipped">See what shipped</a>
+        <a class="link" href="https://x.com/voyagerships" rel="me noopener">@voyagerships on X</a>
       </p>
     </div>
     <figure class="record" aria-hidden="true">
@@ -79,71 +80,71 @@
     </figure>
   </section>
 
-  <section class="how wrap" aria-labelledby="how-h">
-    <h2 id="how-h">How it works</h2>
-    <ol class="steps">
-      <li>
-        <h3>Mission numbers</h3>
-        <p>Each launch gets the next number, starting at 001. Numbers never get reused, even if the launch flops.</p>
-      </li>
-      <li>
-        <h3>Open code</h3>
-        <p>Every tool has a public repo under <a href="https://github.com/voyager-from-space" rel="noopener">voyager-from-space</a>. Read it, fork it, open an issue.</p>
-      </li>
-      <li>
-        <h3>Raw numbers</h3>
-        <p>If I post a number, I measured it. Load times, file sizes, users, bugs. The bad ones get posted too.</p>
-      </li>
-    </ol>
+  <section class="shipped wrap" id="shipped" aria-labelledby="shipped-h">
+    <h2 id="shipped-h">Shipped</h2>
+    <div id="example-banner" class="example-banner" role="note" hidden>You're looking at <b>ships.example.json</b>, fake test data. <a href="./#shipped">Back to the real list</a></div>
+    <div id="ships" class="ships">
+    <!-- cards:start (generated by `npm run sync` from ships.json) -->
+<article class="ship" id="ship-maketitle">
+      <div class="ship-main">
+        <h3>maketitle</h3>
+        <p class="job">Opens any arXiv paper's LaTeX source in an editor and compiles it in your browser tab.</p>
+        <p class="go"><a class="btn" href="https://maketitle.vercel.app/" rel="noopener">Open maketitle</a><a href="https://github.com/voyager-from-space/maketitle" rel="noopener">Code</a></p>
+      </div>
+      <div class="ship-fact">
+        <p class="fig">4.76 s</p>
+        <p class="fact">Edit the title of paper 1706.03762, press Ctrl+Enter, and a new PDF is on screen in 4.76 seconds with TeX Live cached.</p>
+        <p class="measured">Measured 19 Nov 2026. The first visit downloads 166.5 MB for a plain article, up to 416.6 MB for papers with many packages. After one compile it works offline.</p>
+      </div>
+    </article>
+    <article class="ship" id="ship-papershed">
+      <div class="ship-main">
+        <h3>papershed</h3>
+        <p class="job">Cleans a LaTeX zip before you post it: strips comments, photo GPS and PDF metadata, and flags possible leaks.</p>
+        <p class="go"><a class="btn" href="https://voyager-from-space.github.io/papershed/" rel="noopener">Open papershed</a><a href="https://github.com/voyager-from-space/papershed" rel="noopener">Code</a></p>
+      </div>
+      <div class="ship-fact">
+        <p class="fig">73% smaller</p>
+        <p class="fact">Its own planted sample zip went from 4.6 MB to 1.3 MB. It flagged 9 possible leaks and removed 14 files and 9 comments.</p>
+        <p class="measured">Measured 19 Nov 2026. The optional compile check downloads about 177 MB the first time.</p>
+      </div>
+    </article>
+    <article class="ship" id="ship-texdiet">
+      <div class="ship-main">
+        <h3>texdiet</h3>
+        <p class="job">Finds what makes a LaTeX project slow to compile and hands back a smaller zip.</p>
+        <p class="go"><a class="btn" href="https://voyager-from-space.github.io/texdiet/" rel="noopener">Open texdiet</a><a href="https://github.com/voyager-from-space/texdiet" rel="noopener">Code</a></p>
+      </div>
+      <div class="ship-fact">
+        <p class="fig">75% smaller</p>
+        <p class="fact">A public 30.1 MB test thesis zip came back as 7.7 MB with 10 changes listed. Nothing was deleted and nothing was uploaded.</p>
+        <p class="measured">Measured 15 Nov 2026.</p>
+      </div>
+    </article>
+    <!-- cards:end -->
+    </div>
+    <noscript><p class="sub">The list above is prerendered. The raw data is at <a href="ships.json">ships.json</a>.</p></noscript>
   </section>
 
-  <section class="log wrap" id="log" aria-labelledby="log-h" tabindex="-1">
-    <div class="sec-head">
-      <h2 id="log-h">Mission log</h2>
-      <p class="sub">Newest first. The whole log is one file, <a href="ships.json" id="log-src">ships.json</a>.</p>
-    </div>
-    <div id="example-banner" class="example-banner" role="note" hidden>
-      You're looking at <b>ships.example.json</b>, fake test data. <a href="./#log">Back to the real log</a>
-    </div>
-    <div id="next"></div>
-    <div id="ships"><p class="sub">Loading the log&hellip;</p></div>
-    <noscript><p class="sub">The log needs JavaScript to draw. The raw data is at <a href="ships.json">ships.json</a>. Next up is mission 001, texdiet, on 16 Nov 2026 (planned, not shipped).</p></noscript>
-  </section>
-
-  <section class="manifesto wrap" id="manifesto" aria-labelledby="man-h">
-    <h2 id="man-h">Manifesto</h2>
-    <div class="man-body">
-      <p>Pick a problem people actually complain about. Build the smallest thing that fixes it. Ship it, link the code, post what happened. Then start the next one.</p>
-      <p>The tools are free wherever I can make them free. No waitlists, no "coming soon" pages, and no sign-up wall in front of something that should just work.</p>
-    </div>
-    <div class="quotes">
-      <figure class="quote">
-        <blockquote><p>Look again at that dot. That's here. That's home. That's us.</p></blockquote>
-        <figcaption>Carl Sagan, <cite>Pale Blue Dot</cite> (1994)</figcaption>
-      </figure>
-      <figure class="quote">
-        <blockquote><p>This is a present from a small distant world, a token of our sounds, our science, our images, our music, our thoughts, and our feelings.</p></blockquote>
-        <figcaption>Jimmy Carter, statement placed on the Voyager spacecraft (1977)</figcaption>
-      </figure>
-      <figure class="quote">
-        <blockquote><p>If you wish to make an apple pie from scratch, you must first invent the universe.</p></blockquote>
-        <figcaption>Carl Sagan, <cite>Cosmos</cite> (1980)</figcaption>
-      </figure>
-    </div>
+  <section class="building wrap" id="building" aria-labelledby="building-h">
+    <h2 id="building-h">Building now</h2>
+    <div id="next"><!-- next:start -->
+<p class="next"><span class="next-name">blindsanitize</span> <span class="next-what">Checks a paper for whatever gives away its authors before a double-blind submission. Nothing to try yet.</span></p>
+    <!-- next:end --></div>
   </section>
 
   <section class="links wrap" id="links" aria-labelledby="links-h">
-    <h2 id="links-h">Follow the probe</h2>
+    <h2 id="links-h">Elsewhere</h2>
     <ul class="link-list">
-      <li><a href="https://x.com/voyagerships" rel="me noopener" id="link-x"><span class="where">X</span><span class="what">@voyagerships</span><span class="why">Launch posts and numbers</span></a></li>
-      <li><a href="https://github.com/voyager-from-space" rel="me noopener" id="link-gh"><span class="where">GitHub</span><span class="what">voyager-from-space</span><span class="why">All the code</span></a></li>
+      <li><a href="https://x.com/voyagerships" rel="me noopener"><span class="where">X</span><span class="what">@voyagerships</span></a></li>
+      <li><a href="https://github.com/voyager-from-space" rel="me noopener"><span class="where">GitHub</span><span class="what">voyager-from-space</span></a></li>
     </ul>
   </section>
 </main>
 
 <footer class="foot wrap">
-  <p>Static site. No trackers, no cookies, no analytics.</p>
+  <p>Static page. No trackers, no cookies, no analytics. <a href="ships.json">ships.json</a> is the whole product list.</p>
 </footer>
-<script src="app.js" defer></script>
+<script type="module" src="app.js"></script>
 </body>
 </html>

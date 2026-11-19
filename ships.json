@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "date": "2026-11-19",
+    "name": "maketitle",
+    "oneliner": "Opens any arXiv paper's LaTeX source in an editor and compiles it in your browser tab.",
+    "figure": "4.76 s",
+    "fact": "Edit the title of paper 1706.03762, press Ctrl+Enter, and a new PDF is on screen in 4.76 seconds with TeX Live cached.",
+    "measured": "2026-11-19",
+    "note": "The first visit downloads 166.5 MB for a plain article, up to 416.6 MB for papers with many packages. After one compile it works offline.",
+    "live": "https://maketitle.vercel.app/",
+    "repo": "https://github.com/voyager-from-space/maketitle",
+    "verified": true
+  },
+  {
+    "date": "2026-11-18",
+    "name": "papershed",
+    "oneliner": "Cleans a LaTeX zip before you post it: strips comments, photo GPS and PDF metadata, and flags possible leaks.",
+    "figure": "73% smaller",
+    "fact": "Its own planted sample zip went from 4.6 MB to 1.3 MB. It flagged 9 possible leaks and removed 14 files and 9 comments.",
+    "measured": "2026-11-19",
+    "note": "The optional compile check downloads about 177 MB the first time.",
+    "live": "https://voyager-from-space.github.io/papershed/",
+    "repo": "https://github.com/voyager-from-space/papershed",
+    "verified": true
+  },
+  {
+    "date": "2026-11-13",
+    "name": "texdiet",
+    "oneliner": "Finds what makes a LaTeX project slow to compile and hands back a smaller zip.",
+    "figure": "75% smaller",
+    "fact": "A public 30.1 MB test thesis zip came back as 7.7 MB with 10 changes listed. Nothing was deleted and nothing was uploaded.",
+    "measured": "2026-11-15",
+    "live": "https://voyager-from-space.github.io/texdiet/",
+    "repo": "https://github.com/voyager-from-space/texdiet",
+    "verified": true
+  }
+]
