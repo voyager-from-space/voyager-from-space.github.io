@@ -1,0 +1,82 @@
+/* voyager design v1: shared by every voyager site. Source of truth lives in
+   voyager-from-space.github.io/design; `npm run design` copies it into each site.
+   Look: deep-space navy, one warm accent (amber), one cool accent (ice).
+   Type: IBM Plex Sans 400/600 and Plex Mono for paths and numbers (SIL OFL 1.1, files ship with each site).
+   Space: 4 8 12 16 24 40 64 as --s1..--s7. Radius: 6 (small), 12 (panel), pill (buttons). */
+
+:root {
+  --bg: #070b16; --panel: #0c1322; --panel-2: #111a2e; --line: #1b2640; --line-strong: #33456b;
+  --ink: #e8edf6; --muted: #9ba7bf; --amber: #ffb547; --ice: #9fd3ee;
+  --good: #6fd6b0; --bad: #ff8f84;
+  --sans: "Plex Sans", system-ui, sans-serif; --mono: "Plex Mono", ui-monospace, monospace;
+  --t-1: .85rem; --t0: 1.0625rem; --t1: 1.328rem; --t2: 1.66rem; --t3: 2.075rem; --t4: 2.594rem; --t5: 3.242rem;
+  --s1: .25rem; --s2: .5rem; --s3: .75rem; --s4: 1rem; --s5: 1.5rem; --s6: 2.5rem; --s7: 4rem;
+  --r-sm: 6px; --r: 12px;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { background: var(--bg); color: var(--ink); -webkit-text-size-adjust: 100%; }
+body { margin: 0; font: 400 var(--t0)/1.65 var(--sans); min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; }
+body > main { flex: 1; }
+h1, h2, h3, h4, p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: var(--ice); text-decoration: underline; text-decoration-color: rgb(159 211 238 / .4); text-underline-offset: .2em; }
+a:hover { text-decoration-color: currentColor; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 3px; }
+::selection { background: var(--amber); color: var(--bg); }
+code, .mono { font-family: var(--mono); font-size: .9em; }
+.wrap { width: min(100% - 2.5rem, 52rem); margin-inline: auto; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.skip { position: absolute; left: 1rem; top: -4rem; background: var(--amber); color: var(--bg); padding: .5rem .9rem; border-radius: 4px; z-index: 10; text-decoration: none; }
+.skip:focus { top: 1rem; }
+
+/* sky: static dots and a faint glow; the one slow twinkle is in the portfolio only */
+.sky { position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(1px 1px at 20px 30px, rgb(232 237 246 / .5), transparent 60%),
+    radial-gradient(1px 1px at 140px 90px, rgb(232 237 246 / .32), transparent 60%),
+    radial-gradient(1.5px 1.5px at 90px 160px, rgb(159 211 238 / .4), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 0%, rgb(30 48 92 / .32), transparent 70%);
+  background-size: 230px 230px, 310px 310px, 270px 270px, 100% 100%; }
+
+/* buttons */
+.btn { display: inline-block; padding: .7rem 1.2rem; border-radius: 999px; border: 0; background: var(--amber); color: var(--bg); font: 600 var(--t-1)/1 var(--sans); text-decoration: none; cursor: pointer; }
+.btn:hover { background: #ffc875; }
+.btn:disabled { opacity: .5; cursor: progress; }
+.btn.ghost { background: transparent; color: var(--ice); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.btn.ghost:hover { background: var(--panel-2); }
+.linkish { background: none; border: 0; padding: 0; font: inherit; color: var(--ice); text-decoration: underline; text-decoration-color: rgb(159 211 238 / .4); text-underline-offset: .2em; cursor: pointer; }
+
+/* header: voyager / tool .......... source */
+.vg-top { display: flex; align-items: center; gap: .6rem; padding-block: 1.5rem; font-size: var(--t-1); }
+.vg-brand { display: inline-flex; align-items: center; gap: .5rem; color: var(--muted); text-decoration: none; }
+.vg-brand:hover { color: var(--ink); }
+.vg-brand svg { color: var(--ice); }
+.vg-sep { color: var(--line-strong); }
+.vg-tool { color: var(--ink); font-weight: 600; font-size: var(--t0); text-decoration: none; }
+.vg-top .vg-end { margin-left: auto; color: var(--muted); text-decoration: none; }
+.vg-top .vg-end:hover { color: var(--ink); }
+
+/* footer: the route, then the small print */
+.vg-foot { padding-block: var(--s6) 3rem; border-top: 1px solid var(--line); color: var(--muted); font-size: var(--t-1); display: grid; gap: var(--s5); }
+.vg-route h2 { font-size: var(--t-1); font-weight: 600; color: var(--ink); margin-bottom: var(--s3); letter-spacing: 0; }
+.vg-steps { display: grid; gap: var(--s3); counter-reset: step; }
+.vg-steps li { position: relative; padding-left: 1.9rem; counter-increment: step; }
+.vg-steps li::before { content: counter(step); position: absolute; left: 0; top: .1rem; width: 1.25rem; height: 1.25rem; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line-strong); color: var(--muted); font: 400 .72rem/1 var(--mono); background: var(--bg); z-index: 1; }
+.vg-steps li::after { content: ""; position: absolute; left: .625rem; top: 1.4rem; bottom: -.75rem; width: 1px; background: var(--line-strong); }
+.vg-steps li:last-child::after { display: none; }
+.vg-steps li.here::before { background: var(--amber); border-color: var(--amber); color: var(--bg); font-weight: 600; }
+.vg-steps a, .vg-steps .vg-name { font-weight: 600; color: var(--ink); text-decoration: none; }
+.vg-steps a:hover { text-decoration: underline; }
+.vg-steps .vg-name { color: var(--amber); }
+.vg-steps .vg-what { display: block; color: var(--muted); }
+.vg-side { margin-top: var(--s3); }
+.vg-legal { max-width: 46rem; }
+@media (min-width: 46rem) {
+  .vg-steps { grid-template-columns: repeat(3, 1fr); gap: var(--s5); }
+  .vg-steps li { padding: 1.9rem 0 0; }
+  .vg-steps li::before { top: 0; }
+  .vg-steps li::after { left: 1.5rem; right: -1.25rem; top: .625rem; bottom: auto; width: auto; height: 1px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } html { scroll-behavior: auto; } }

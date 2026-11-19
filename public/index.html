@@ -28,6 +28,7 @@
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="fonts/IBMPlexSans-Regular-Latin1.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="voyager.css">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -88,7 +89,7 @@
 <article class="ship" id="ship-maketitle">
       <div class="ship-main">
         <h3>maketitle</h3>
-        <p class="job">Opens any arXiv paper's LaTeX source in an editor and compiles it in your browser tab.</p>
+        <p class="job">Opens an arXiv paper's LaTeX source in an editor and compiles it in your browser tab.</p>
         <p class="go"><a class="btn" href="https://maketitle.vercel.app/" rel="noopener">Open maketitle</a><a href="https://github.com/voyager-from-space/maketitle" rel="noopener">Code</a></p>
       </div>
       <div class="ship-fact">
@@ -113,7 +114,7 @@
       <div class="ship-main">
         <h3>texdiet</h3>
         <p class="job">Finds what makes a LaTeX project slow to compile and hands back a smaller zip.</p>
-        <p class="go"><a class="btn" href="https://voyager-from-space.github.io/texdiet/" rel="noopener">Open texdiet</a><a href="https://github.com/voyager-from-space/texdiet" rel="noopener">Code</a></p>
+        <p class="go"><a class="btn" href="https://texdiet.vercel.app/" rel="noopener">Open texdiet</a><a href="https://github.com/voyager-from-space/texdiet" rel="noopener">Code</a></p>
       </div>
       <div class="ship-fact">
         <p class="fig">75% smaller</p>
@@ -126,6 +127,17 @@
     <noscript><p class="sub">The list above is prerendered. The raw data is at <a href="ships.json">ships.json</a>.</p></noscript>
   </section>
 
+  <section class="route wrap" id="route" aria-labelledby="route-h">
+    <h2 id="route-h">One route for a paper</h2>
+    <p class="sub">The tools were built to be used in this order, and each one works on its own.</p>
+    <ol class="vg-steps">
+      <li><a href="https://texdiet.vercel.app/">texdiet</a><span class="vg-what">Slim the project so it compiles faster.</span></li>
+      <li><a href="https://voyager-from-space.github.io/papershed/">papershed</a><span class="vg-what">Clean the zip before you post it.</span></li>
+      <li><a href="https://maketitle.vercel.app/">maketitle</a><span class="vg-what">Open an arXiv paper's LaTeX source and compile it in the tab.</span></li>
+    </ol>
+    <p class="vg-side">Submitting double-blind? <a href="https://voyager-from-space.github.io/blindsanitize/">blindsanitize</a> checks the source, PDF and extra files for anything that points to the authors.</p>
+  </section>
+
   <section class="building wrap" id="building" aria-labelledby="building-h">
     <h2 id="building-h">Building now</h2>
     <div id="next"><!-- next:start -->
@@ -136,8 +148,8 @@
   <section class="links wrap" id="links" aria-labelledby="links-h">
     <h2 id="links-h">Elsewhere</h2>
     <ul class="link-list">
-      <li><a href="https://x.com/voyagerships" rel="me noopener"><span class="where">X</span><span class="what">@voyagerships</span></a></li>
-      <li><a href="https://github.com/voyager-from-space" rel="me noopener"><span class="where">GitHub</span><span class="what">voyager-from-space</span></a></li>
+      <li><a href="https://x.com/voyagerships" rel="me noopener"><span class="where">X</span><span class="vg-what">@voyagerships</span></a></li>
+      <li><a href="https://github.com/voyager-from-space" rel="me noopener"><span class="where">GitHub</span><span class="vg-what">voyager-from-space</span></a></li>
     </ul>
   </section>
 </main>

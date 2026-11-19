@@ -64,3 +64,7 @@ git subtree split --prefix public -b gh-pages-new && git push origin gh-pages-ne
 ## license
 
 Code MIT (see LICENSE). Fonts OFL 1.1 (see public/fonts/OFL.txt).
+
+## shared design
+
+`design/` is the source of truth for the look every voyager site shares: tokens, header, footer and the route block (`voyager.core.css`, `voyager.tool.css`, `faces.css`), and the share-card renderer (`og/`). `sh design/sync.sh` builds `voyager.css` and copies it into this site and the sibling repos' `site/` folders. Type is IBM Plex Sans and Mono under the SIL Open Font License 1.1 (`public/fonts/OFL.txt`).

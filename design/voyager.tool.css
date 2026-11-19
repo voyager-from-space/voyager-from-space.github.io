@@ -1,0 +1,35 @@
+
+/* ---- tool pages (texdiet, papershed, blindsanitize): the shared drop-a-zip layout ---- */
+.tool .wrap { width: min(100% - 2.5rem, 50rem); }
+.intro { display: grid; gap: 1.25rem; padding-block: clamp(1.5rem, 6vw, 3.5rem) 2.5rem; }
+h1 { font-size: clamp(var(--t2), 1rem + 3vw, var(--t3)); line-height: 1.15; font-weight: 600; letter-spacing: -.02em; text-wrap: balance; max-width: 40rem; }
+.lede { color: var(--muted); max-width: 40rem; }
+.drop-area { display: grid; gap: 1rem; padding-bottom: 3rem; }
+.drop { color: var(--ink); display: grid; gap: .4rem; place-items: center; text-align: center; padding: 3rem 1.5rem; border: 1.5px dashed var(--line-strong); border-radius: 16px; background: rgb(12 19 34 / .6); cursor: pointer; transition: border-color .2s, background .2s; }
+.drop:hover, .drop.over, .drop:focus-within { border-color: var(--ice); background: var(--panel); }
+.drop input { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.drop-title { font-size: var(--t1); font-weight: 600; }
+.drop-sub { color: var(--muted); font-size: var(--t-1); max-width: 28rem; }
+.alt { color: var(--muted); font-size: var(--t-1); text-align: center; }
+.status { min-height: 1.4em; text-align: center; font: 400 var(--t-1)/1.4 var(--mono); color: var(--muted); }
+.results { border-top: 1px solid var(--line); padding-block: 2.5rem 3.5rem; display: grid; gap: 1.75rem; align-content: start; }
+.res-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem 2rem; }
+h2 { font-size: var(--t2); line-height: 1.2; font-weight: 600; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.res-sub { color: var(--muted); margin-top: var(--s1); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 1rem; }
+.stats div { padding: 1rem 1.1rem; border: 1px solid var(--line); border-radius: var(--r); background: var(--panel); }
+.stats dt { font-size: var(--t-1); color: var(--muted); }
+.stats dd { font-size: var(--t1); font-weight: 600; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.stats dd.small { font-size: var(--t-1); font-weight: 400; color: var(--muted); }
+.note { color: var(--muted); font-size: var(--t-1); }
+.note code { color: var(--ink); }
+.sec { font-size: var(--t1); line-height: 1.25; font-weight: 600; margin-top: var(--s6); }
+.sec2 { font-size: var(--t0); font-weight: 600; margin-top: var(--s5); }
+.mini { color: var(--muted); font-size: var(--t-1); margin-top: var(--s2); }
+.where { font: 400 var(--t-1)/1.5 var(--mono); color: var(--ice); opacity: .9; overflow-wrap: anywhere; }
+textarea, select, .row input { width: 100%; font: 400 var(--t-1)/1.5 var(--sans); padding: .55rem .7rem; border: 1px solid var(--line-strong); border-radius: var(--r-sm); background: var(--panel); color: var(--ink); }
+textarea { font-family: var(--mono); resize: vertical; }
+label { display: block; font-size: var(--t-1); color: var(--muted); margin: .75rem 0 .25rem; }
+pre { margin: .5rem 0 0; padding: .7rem .85rem; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-sm); font: 400 .8rem/1.5 var(--mono); overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ink); }
+summary { cursor: pointer; font-weight: 600; }
+@media (max-width: 560px) { .drop { padding: 2rem 1rem; } .tool .btn { width: 100%; text-align: center; } }
