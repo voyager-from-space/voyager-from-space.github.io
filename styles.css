@@ -1,63 +1,21 @@
 /* voyager. deep-space navy, one warm accent (amber), one cool accent (ice). */
-@font-face { font-family: "Plex Sans"; src: url(fonts/IBMPlexSans-Regular-Latin1.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; unicode-range: U+0000, U+000D, U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+FB01-FB02; }
-@font-face { font-family: "Plex Sans"; src: url(fonts/IBMPlexSans-Regular-Pi.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; unicode-range: U+0E3F, U+2000-200D, U+2015, U+2028-2029, U+202F, U+2032-2033, U+2070, U+2074-2079, U+2080-2089, U+2113, U+2116, U+2126, U+212E, U+2150-2151, U+2153-215E, U+2190-2199, U+21A9-21AA, U+21B0-21B3, U+21B6-21B7, U+21BA-21BB, U+21C4, U+21C6, U+2202, U+2206, U+220F, U+2211, U+2215, U+221A, U+221E, U+222B, U+2248, U+2260, U+2264-2265, U+25CA, U+2713, U+274C, U+2B0E-2B11, U+ECE0, U+EFCC, U+FEFF, U+FFFD; }
-@font-face { font-family: "Plex Sans"; src: url(fonts/IBMPlexSans-SemiBold-Latin1.woff2) format("woff2"); font-weight: 600; font-style: normal; font-display: swap; unicode-range: U+0000, U+000D, U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+FB01-FB02; }
-@font-face { font-family: "Plex Sans"; src: url(fonts/IBMPlexSans-SemiBold-Pi.woff2) format("woff2"); font-weight: 600; font-style: normal; font-display: swap; unicode-range: U+0E3F, U+2000-200D, U+2015, U+2028-2029, U+202F, U+2032-2033, U+2070, U+2074-2079, U+2080-2089, U+2113, U+2116, U+2126, U+212E, U+2150-2151, U+2153-215E, U+2190-2199, U+21A9-21AA, U+21B0-21B3, U+21B6-21B7, U+21BA-21BB, U+21C4, U+21C6, U+2202, U+2206, U+220F, U+2211, U+2215, U+221A, U+221E, U+222B, U+2248, U+2260, U+2264-2265, U+25CA, U+2713, U+274C, U+2B0E-2B11, U+ECE0, U+EFCC, U+FEFF, U+FFFD; }
-@font-face { font-family: "Plex Mono"; src: url(fonts/IBMPlexMono-Regular-Latin1.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; unicode-range: U+0000, U+000D, U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+FB01-FB02; }
-@font-face { font-family: "Plex Mono"; src: url(fonts/IBMPlexMono-Regular-Pi.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; unicode-range: U+0E3F, U+2000-200D, U+2015, U+2028-2029, U+202F, U+2032-2033, U+2070, U+2074-2079, U+2080-2089, U+2113, U+2116, U+2126, U+212E, U+2150-2151, U+2153-215E, U+2190-2199, U+21A9-21AA, U+21B0-21B3, U+21B6-21B7, U+21BA-21BB, U+21C4, U+21C6, U+2202, U+2206, U+220F, U+2211, U+2215, U+221A, U+221E, U+222B, U+2248, U+2260, U+2264-2265, U+25CA, U+2713, U+274C, U+2B0E-2B11, U+ECE0, U+EFCC, U+FEFF, U+FFFD; }
 @font-face { font-family: "Plex Sans"; src: url(fonts/IBMPlexSans-Italic-Latin1.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: swap; unicode-range: U+0000, U+000D, U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+FB01-FB02; }
 
 :root {
-  --bg: #070b16;
-  --panel: #0c1322;
-  --line: #1b2640;
-  --ink: #e8edf6;
-  --muted: #9ba7bf;
-  --amber: #ffb547;
-  --ice: #9fd3ee;
-  --sans: "Plex Sans", system-ui, sans-serif;
-  --mono: "Plex Mono", ui-monospace, monospace;
-  /* major-third scale (1.25) on a 17px base */
-  --t-1: .85rem;
-  --t0: 1.0625rem;
-  --t1: 1.328rem;
-  --t2: 1.66rem;
-  --t3: 2.075rem;
-  --t4: 2.594rem;
-  --t5: 3.242rem;
   --space: clamp(3.5rem, 9vw, 6.5rem);
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-html { background: var(--bg); color: var(--ink); -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-body { margin: 0; font: 400 var(--t0)/1.65 var(--sans); min-height: 100vh; overflow-x: hidden; }
-h1, h2, h3, p, ul, figure { margin: 0; }
-ul { padding: 0; list-style: none; }
-a { color: var(--ice); text-decoration: underline; text-decoration-color: rgb(159 211 238 / .4); text-underline-offset: .2em; }
-a:hover { text-decoration-color: currentColor; }
-:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 3px; }
-::selection { background: var(--amber); color: var(--bg); }
 
 .wrap { width: min(100% - 2.5rem, 68rem); margin-inline: auto; }
-.skip { position: absolute; left: 1rem; top: -4rem; background: var(--amber); color: var(--bg); padding: .5rem .9rem; border-radius: 4px; z-index: 10; text-decoration: none; }
-.skip:focus { top: 1rem; }
 
 /* starfield: tiled dot layers, static, with one slow twinkle */
-.sky { position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(1px 1px at 20px 30px, rgb(232 237 246 / .55), transparent 60%),
-    radial-gradient(1px 1px at 140px 90px, rgb(232 237 246 / .35), transparent 60%),
-    radial-gradient(1.5px 1.5px at 90px 160px, rgb(159 211 238 / .45), transparent 60%),
-    radial-gradient(1px 1px at 200px 210px, rgb(232 237 246 / .3), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 80% 0%, rgb(30 48 92 / .35), transparent 70%);
-  background-size: 230px 230px, 310px 310px, 270px 270px, 410px 410px, 100% 100%; }
 .sky::after { content: ""; position: absolute; inset: 0;
   background: radial-gradient(1.5px 1.5px at 60px 70px, rgb(255 181 71 / .5), transparent 60%);
   background-size: 520px 520px; animation: twinkle 7s ease-in-out infinite alternate; }
 
-/* header */
+/* header (same mark as the tool pages) */
 .top { display: flex; align-items: center; justify-content: space-between; padding-block: 1.25rem; }
-.brand { display: inline-flex; align-items: center; gap: .6rem; color: var(--ink); text-decoration: none; font: 400 var(--t-1)/1 var(--mono); letter-spacing: .08em; }
+.brand { display: inline-flex; align-items: center; gap: .5rem; color: var(--ink); text-decoration: none; font: 600 var(--t0)/1 var(--sans); }
 .brand-mark { color: var(--ice); }
 .top nav { display: flex; gap: 1.5rem; }
 .top nav a { color: var(--muted); text-decoration: none; font-size: var(--t-1); }
@@ -69,8 +27,6 @@ a:hover { text-decoration-color: currentColor; }
 h1 { font-size: clamp(var(--t3), 1.1rem + 4.4vw, var(--t5)); line-height: 1.12; font-weight: 600; letter-spacing: -.02em; text-wrap: balance; }
 .lede { color: var(--muted); max-width: 34rem; }
 .cta { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.75rem; margin-top: .25rem; }
-.btn { display: inline-block; padding: .65rem 1.15rem; border-radius: 999px; background: var(--amber); color: var(--bg); text-decoration: none; font-weight: 600; }
-.btn:hover { background: #ffc875; }
 .record { order: -1; width: 6.5rem; justify-self: start; }
 .record svg { display: block; width: 100%; height: auto; overflow: visible; }
 .orbit { fill: none; stroke: var(--ice); stroke-opacity: .22; stroke-dasharray: 2 6; }
@@ -88,7 +44,7 @@ h1 { font-size: clamp(var(--t3), 1.1rem + 4.4vw, var(--t5)); line-height: 1.12; 
 /* sections */
 h2 { font-size: var(--t2); line-height: 1.2; font-weight: 600; letter-spacing: -.01em; margin-bottom: 1.75rem; }
 .sub { color: var(--muted); }
-.shipped, .building, .links { padding-block: 0 var(--space); }
+.shipped, .route, .building, .links { padding-block: 0 var(--space); }
 
 /* product cards: the measured figure is the loud part */
 .ships { display: grid; gap: 1.25rem; }
@@ -131,3 +87,11 @@ h2 { font-size: var(--t2); line-height: 1.2; font-weight: 600; letter-spacing: -
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* the route: same steps as every tool footer, with room to breathe */
+.route { display: grid; gap: var(--s4); }
+.route h2 { margin-bottom: 0; }
+.route .vg-steps { margin-top: var(--s2); }
+.route .vg-steps a { font-size: var(--t1); }
+.route .vg-steps .what { margin-top: var(--s1); }
+.route .vg-side { color: var(--muted); margin-top: var(--s2); }

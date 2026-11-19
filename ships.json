@@ -2,7 +2,7 @@
   {
     "date": "2026-11-19",
     "name": "maketitle",
-    "oneliner": "Opens any arXiv paper's LaTeX source in an editor and compiles it in your browser tab.",
+    "oneliner": "Opens an arXiv paper's LaTeX source in an editor and compiles it in your browser tab.",
     "figure": "4.76 s",
     "fact": "Edit the title of paper 1706.03762, press Ctrl+Enter, and a new PDF is on screen in 4.76 seconds with TeX Live cached.",
     "measured": "2026-11-19",
@@ -30,7 +30,7 @@
     "figure": "75% smaller",
     "fact": "A public 30.1 MB test thesis zip came back as 7.7 MB with 10 changes listed. Nothing was deleted and nothing was uploaded.",
     "measured": "2026-11-15",
-    "live": "https://voyager-from-space.github.io/texdiet/",
+    "live": "https://texdiet.vercel.app/",
     "repo": "https://github.com/voyager-from-space/texdiet",
     "verified": true
   }
