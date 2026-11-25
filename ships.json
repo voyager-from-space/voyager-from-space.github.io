@@ -1,5 +1,17 @@
 [
   {
+    "date": "2026-11-20",
+    "name": "blindsanitize",
+    "oneliner": "Checks a paper's source, PDF and supplementary files for anything that gives away its authors before a double-blind submission, and hands back cleaned copies.",
+    "figure": "61 → 5",
+    "fact": "A test submission with 61 planted identity strings came back with none left in the source or the PDF's hidden data. The 5 left are in code files, which it flags for you instead of editing.",
+    "measured": "2026-11-19",
+    "note": "A pattern-based scan, not a guarantee. The optional build check downloads about 177 MB the first time.",
+    "live": "https://voyager-from-space.github.io/blindsanitize/",
+    "repo": "https://github.com/voyager-from-space/blindsanitize",
+    "verified": true
+  },
+  {
     "date": "2026-11-19",
     "name": "maketitle",
     "oneliner": "Opens an arXiv paper's LaTeX source in an editor and compiles it in your browser tab.",

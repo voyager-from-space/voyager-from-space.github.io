@@ -8,8 +8,8 @@
   "tagline": "A nerdy shipper of free, in-browser tools. Open code, measured numbers.",
   "next": [
     {
-      "name": "blindsanitize",
-      "what": "Checks a paper for whatever gives away its authors before a double-blind submission. Nothing to try yet."
+      "name": "texlint",
+      "what": "A command-line check that flags what makes a LaTeX project slow to compile, before you commit. Nothing to try yet."
     }
   ]
 }
