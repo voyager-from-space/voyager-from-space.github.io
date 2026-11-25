@@ -76,7 +76,7 @@ const ships = JSON.parse(readFileSync(new URL("../public/ships.json", import.met
     ok(live === s.live && repo === s.repo && fig === s.figure && fact === s.fact, `card ${s.name}: job, figure, fact, live link and code link match ships.json`);
   }
   ok((await p.locator('a[href="https://x.com/voyagerships"]').count()) >= 2 && (await p.locator('a[href="https://github.com/voyager-from-space"]').count()) >= 2, "X and GitHub links present");
-  ok((await p.locator("#next .next-name").innerText()) === "blindsanitize", "Building now names blindsanitize");
+  { const want = JSON.parse(readFileSync(new URL("../public/site.config.json", import.meta.url))).next[0].name; ok((await p.locator("#next .next-name").first().innerText()) === want, `Building now names ${want} (from site.config.json)`); }
   const first = await p.locator(".ship").first().boundingBox();
   ok(first.y + 220 < 800, `first card and its figure are visible in the first 1280x800 screen (y ${Math.round(first.y)})`);
   const sw = await p.evaluate(() => document.documentElement.scrollWidth);
